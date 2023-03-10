@@ -4,7 +4,7 @@ import android.content.res.Configuration
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.*
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
@@ -30,10 +30,10 @@ fun SnackMessage(
         SnackbarHost(
             modifier = Modifier.align(Alignment.BottomCenter),
             hostState = snackbarHostState
-        ) { snackbarData -> SnackbarContent(snackbarData.message, snackbarData.actionLabel) }
+        ) { snackbarData -> SnackbarContent(snackbarData.visuals.message, snackbarData.visuals.actionLabel) }
         LaunchedEffect(snackbarHostState.currentSnackbarData) {
             scope.launch {
-                when (snackbarHostState.showSnackbar(message, actionLabel, duration)) {
+                when (snackbarHostState.showSnackbar(message, actionLabel, false, duration)) {
                     SnackbarResult.Dismissed -> onDismiss?.invoke()
                     SnackbarResult.ActionPerformed -> onActionPerform?.invoke()
                 }
@@ -53,7 +53,7 @@ private fun SnackbarContent(
         if (actionLabel != null) {
             @Composable {
                 TextButton(
-                    colors = ButtonDefaults.textButtonColors(contentColor = SnackbarDefaults.primaryActionColor),
+                    colors = ButtonDefaults.textButtonColors(contentColor = SnackbarDefaults.actionContentColor),
                     onClick = { actionPerformed?.invoke() },
                     content = { Text(actionLabel) }
                 )

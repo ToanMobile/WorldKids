@@ -5,6 +5,12 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ErrorOutline
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -23,7 +29,7 @@ fun Error(
     isLoading: Boolean = false,
     retry: (() -> Unit)? = null
 ) {
-    Surface(color = MaterialTheme.colors.background) {
+    Surface(color = MaterialTheme.colorScheme.background) {
         Box(
             contentAlignment = Alignment.Center,
             modifier = Modifier
@@ -46,13 +52,13 @@ fun Error(
                 Spacer(modifier = Modifier.size(16.dp))
                 Text(
                     text = stringResource(id = R.string.error_view_oops),
-                    style = MaterialTheme.typography.body1
+                    style = MaterialTheme.typography.bodyLarge
                 )
                 Spacer(modifier = Modifier.size(8.dp))
                 Text(
                     text = errorMessage,
                     textAlign = TextAlign.Center,
-                    style = MaterialTheme.typography.body2
+                    style = MaterialTheme.typography.bodyMedium
                 )
                 Spacer(modifier = Modifier.size(16.dp))
                 TextButton(onClick = { retry?.invoke() }) {

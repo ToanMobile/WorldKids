@@ -38,7 +38,7 @@ ext {
     composeUiTooling            = "androidx.compose.ui:ui-tooling:$composeVersion"
     composeUiToolingPreview     = "androidx.compose.ui:ui-tooling-preview:$composeVersion"
     composeFoundation           = "androidx.compose.foundation:foundation:$composeMaterialVersion"
-    composeMaterial             = "androidx.compose.material:material:$composeMaterialVersion"
+    composeMaterial             = "androidx.compose.material3:material3:1.0.1"
     composeMaterialIconsExt     = "androidx.compose.material:material-icons-extended:$composeMaterialVersion"
     activityCompose             = "androidx.activity:activity-compose:1.6.1"
     accompanistSwiperefresh     = "com.google.accompanist:accompanist-swiperefresh:0.28.0"

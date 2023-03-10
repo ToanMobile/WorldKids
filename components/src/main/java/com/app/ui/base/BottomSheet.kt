@@ -5,9 +5,15 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Divider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -28,13 +34,13 @@ fun BottomSheet(
             .wrapContentHeight()
             .fillMaxWidth()
             .clip(RoundedCornerShape(topEnd = 20.dp, topStart = 20.dp))
-            .background(MaterialTheme.colors.surface)
+            .background(MaterialTheme.colorScheme.surface)
     ) {
         Box(modifier = Modifier.padding(top = 35.dp)) {
             content()
         }
         Divider(
-            color = MaterialTheme.colors.primary,
+            color = MaterialTheme.colorScheme.primary,
             thickness = 5.dp,
             modifier = Modifier
                 .padding(top = 12.dp)
@@ -49,12 +55,12 @@ fun BottomSheet(
         ) {
             Button(
                 shape = CircleShape,
-                elevation = ButtonDefaults.elevation(
+                elevation = ButtonDefaults.buttonElevation(
                     defaultElevation = 0.dp,
                     pressedElevation = 0.dp
                 ),
                 contentPadding = PaddingValues(0.dp),
-                colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.primary),
+                colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
                 modifier = Modifier.size(28.dp),
                 onClick = { onDismiss?.invoke() }
             ) {

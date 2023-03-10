@@ -7,13 +7,13 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.CheckBox
 import androidx.compose.material.icons.outlined.CheckBoxOutlineBlank
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -35,7 +35,7 @@ fun CardCheck(
                 .padding(all = 6.dp)
                 .size(30.dp)
                 .alpha(0.5f)
-                .background(MaterialTheme.colors.background, CircleShape)
+                .background(MaterialTheme.colorScheme.background, CircleShape)
         )
         // IconButton CheckBox
         Box(
@@ -52,7 +52,7 @@ fun CardCheck(
                     modifier = Modifier
                         .size(18.dp)
                         .align(Alignment.Center),
-                    tint = MaterialTheme.colors.onBackground,
+                    tint = MaterialTheme.colorScheme.onBackground,
                     contentDescription = "Check Card"
                 )
             }

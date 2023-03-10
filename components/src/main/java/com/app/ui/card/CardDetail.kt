@@ -7,9 +7,15 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowForward
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -26,6 +32,7 @@ import com.app.domain.model.Card
 import com.app.domain.model.TypeEnum
 import com.app.ui.R
 import com.app.ui.theme.BaseTheme
+import com.app.ui.theme.SupportScreenSize
 
 @Composable
 fun CardDetail(
@@ -36,8 +43,8 @@ fun CardDetail(
         Box {
             Card(
                 modifier = Modifier.fillMaxWidth(),
-                backgroundColor = MaterialTheme.colors.surface,
-                elevation = 4.dp,
+                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+                elevation = CardDefaults.cardElevation(4.dp),
                 shape = RoundedCornerShape(0.dp)
             ) {
                 Image(
@@ -60,7 +67,7 @@ fun CardDetail(
                     .aspectRatio(350f / 495f)
                     .clip(RoundedCornerShape(12.dp))
                     .align(Alignment.Center)
-                    .background(MaterialTheme.colors.background)
+                    .background(MaterialTheme.colorScheme.background)
             )
         }
         Button(
@@ -81,8 +88,8 @@ fun CardDetail(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 12.dp, top = 6.dp, end = 12.dp, bottom = 12.dp),
-            backgroundColor = MaterialTheme.colors.surface,
-            elevation = 4.dp
+            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+            elevation = CardDefaults.cardElevation(4.dp),
         ) {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
@@ -91,7 +98,7 @@ fun CardDetail(
                 Text(
                     text = card.name,
                     maxLines = 1,
-                    style = MaterialTheme.typography.h6
+                    style = SupportScreenSize.textStyle.text24Bold
                 )
                 card.japaneseName?.let {
                     Spacer(modifier = Modifier.size(2.dp))
@@ -99,7 +106,7 @@ fun CardDetail(
                         text = it,
                         maxLines = 5,
                         overflow = TextOverflow.Ellipsis,
-                        style = MaterialTheme.typography.body1
+                        style = SupportScreenSize.textStyle.text14Bold
                     )
                 }
                 card.frenchName?.let {
@@ -108,7 +115,7 @@ fun CardDetail(
                         text = it,
                         maxLines = 5,
                         overflow = TextOverflow.Ellipsis,
-                        style = MaterialTheme.typography.body1
+                        style = SupportScreenSize.textStyle.text14Bold
                     )
                 }
                 Spacer(modifier = Modifier.size(20.dp))
@@ -116,14 +123,14 @@ fun CardDetail(
                     text = "Pokedex N° ${card.pokemonNumber}",
                     maxLines = 5,
                     overflow = TextOverflow.Ellipsis,
-                    style = MaterialTheme.typography.body2
+                    style = SupportScreenSize.textStyle.text14Bold
                 )
                 Spacer(modifier = Modifier.size(6.dp))
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Image(
                         painter = painterResource(R.drawable.draw),
                         contentDescription = "Illustrator",
-                        colorFilter = ColorFilter.tint(MaterialTheme.colors.onSurface),
+                        colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurface),
                         modifier = Modifier.size(12.dp)
                     )
                     Spacer(Modifier.size(ButtonDefaults.IconSpacing))
@@ -131,7 +138,7 @@ fun CardDetail(
                         text = card.illustrator,
                         maxLines = 5,
                         overflow = TextOverflow.Ellipsis,
-                        style = MaterialTheme.typography.body2
+                        style = SupportScreenSize.textStyle.text14Bold
                     )
                 }
                 Spacer(modifier = Modifier.size(20.dp))

@@ -3,7 +3,7 @@ package com.app.ui.card
 import android.content.res.Configuration
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.MaterialTheme
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
@@ -23,7 +23,7 @@ fun CardRarity(
     Image(
         painter = painterResource(rarityEnum.toDrawable()),
         contentDescription = "Image Rarity",
-        colorFilter = ColorFilter.tint(MaterialTheme.colors.onSurface),
+        colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurface),
         modifier = Modifier.size(size)
     )
 }

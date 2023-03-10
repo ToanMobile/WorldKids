@@ -1,36 +1,60 @@
 package com.app.ui.theme
 
-import android.app.Activity
+import android.util.Log
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Typography
-import androidx.compose.material.lightColors
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.lightColorScheme
+
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.toArgb
-import androidx.compose.ui.platform.LocalView
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
-import androidx.core.view.WindowCompat
 import com.app.ui.R
 import com.google.accompanist.systemuicontroller.SystemUiController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import kotlin.text.Typography
 
-val colorGreen = Color(0xFF3E9346)
-val colorBlue = Color(0xFF3968DA)
-val colorBackgroundHeader = Color(0xFFDCF1DD)
+object SupportScreenSize {
+    val dimens: Dimensions
+        @Composable
+        get() = LocalAppDimens.current
+    val textStyle: TypographyApp
+        @Composable
+        get() = LocalAppTypography.current
+}
 
-private val LightColors = lightColors(
+
+@Composable
+fun ProvideDimens(dimensions: Dimensions, content: @Composable () -> Unit) {
+    val dimensionSet = remember { dimensions }
+    CompositionLocalProvider(LocalAppDimens provides dimensionSet, content = content)
+}
+
+private val LocalAppDimens = staticCompositionLocalOf { normalDimension }
+
+@Composable
+fun ProvideAppTypography(typography: TypographyApp, content: @Composable () -> Unit) {
+    val typographySet = remember { typography }
+    CompositionLocalProvider(LocalAppTypography provides typographySet, content = content)
+}
+
+private val LocalAppTypography = staticCompositionLocalOf { textNormalDimension }
+
+
+private val LightColors = lightColorScheme(
     primary = Color(0xFF644887),
-    primaryVariant = Color(0xFF594078),
+    surfaceVariant = Color(0xFF594078),
     onPrimary = Color(0xFFFFFFFF),
 
     secondary = Color(0xFFf9aa33),
-    secondaryVariant = Color(0xFFe0992d),
+    onSurfaceVariant = Color(0xFFe0992d),
     onSecondary = Color(0xFF000000),
 
     background = Color(0xFFFFFDF5),
@@ -43,13 +67,13 @@ private val LightColors = lightColors(
     onError = Color(0xFFFFFFFF)
 )
 
-private val DarkColors = lightColors(
+private val DarkColors = lightColorScheme(
     primary = Color(0xFF705097),
-    primaryVariant = Color(0xFF644887),
+    surfaceVariant = Color(0xFF644887),
     onPrimary = Color(0xFFFFFFFF),
 
     secondary = Color(0xFFf9aa33),
-    secondaryVariant = Color(0xFFe0992d),
+    onSurfaceVariant = Color(0xFFe0992d),
     onSecondary = Color(0xFF000000),
 
     background = Color(0xFF242424),
@@ -62,79 +86,29 @@ private val DarkColors = lightColors(
     onError = Color(0xFFFFFFFF)
 )
 
-private val Montserrat = FontFamily(
-    Font(R.font.montserrat_light, FontWeight.Light),
-    Font(R.font.montserrat_regular, FontWeight.Normal),
-    Font(R.font.montserrat_medium, FontWeight.Medium),
-    Font(R.font.montserrat_semibold, FontWeight.SemiBold),
-    Font(R.font.montserrat_bold, FontWeight.Bold)
-)
-
-private val Typography = Typography(
-    defaultFontFamily = Montserrat,
-    h1 = TextStyle(
-        fontWeight = FontWeight.Light,
-        fontSize = 62.sp // 96.sp
-    ),
-    h2 = TextStyle(
-        fontWeight = FontWeight.Light,
-        fontSize = 50.sp // 60.sp
-    ),
-    h3 = TextStyle(
-        fontWeight = FontWeight.Normal,
-        fontSize = 38.sp // 48.sp
-    ),
-    h4 = TextStyle(
-        fontWeight = FontWeight.Normal,
-        fontSize = 30.sp // 34.sp
-    ),
-    h5 = TextStyle(
-        fontWeight = FontWeight.Normal,
-        fontSize = 22.sp // 24.sp
-    ),
-    h6 = TextStyle(
-        fontWeight = FontWeight.SemiBold, // FontWeight.Medium,
-        fontSize = 18.sp // 20.sp
-    ),
-    subtitle1 = TextStyle(
-        fontWeight = FontWeight.Normal,
-        fontSize = 16.sp
-    ),
-    subtitle2 = TextStyle(
-        fontWeight = FontWeight.SemiBold, // FontWeight.Medium,
-        fontSize = 14.sp
-    ),
-    body1 = TextStyle(
-        fontWeight = FontWeight.Normal,
-        fontSize = 14.sp // 16.sp
-    ),
-    body2 = TextStyle(
-        fontWeight = FontWeight.Normal,
-        fontSize = 12.sp // 14.sp
-    ),
-    button = TextStyle(
-        fontWeight = FontWeight.SemiBold, // FontWeight.Medium,
-        fontSize = 12.sp // 14.sp
-    ),
-    caption = TextStyle(
-        fontWeight = FontWeight.Normal,
-        fontSize = 10.sp // 12.sp
-    ),
-    overline = TextStyle(
-        fontWeight = FontWeight.Normal,
-        fontSize = 8.sp // 10.sp
-    )
-)
-
 @Composable
 fun BaseTheme(content: @Composable () -> Unit) {
     val darkTheme = isSystemInDarkTheme()
     val colors = if (darkTheme) DarkColors else LightColors
-    MaterialTheme(
-        colors = colors,
-        typography = Typography,
-        content = content
-    )
+    val smallestScreen = LocalConfiguration.current.smallestScreenWidthDp
+    Log.e("smallestScreen::",smallestScreen.toString())
+    val dimensions = when (smallestScreen) {
+        in 2100..2150 -> D2100Dimension
+        else -> normalDimension
+    }
+    val typography = when (smallestScreen) {
+        in 2100..2150 -> text2100Dimension
+        else -> textNormalDimension
+    }
     val systemUiController: SystemUiController = rememberSystemUiController()
     systemUiController.isSystemBarsVisible = false
+    ProvideDimens(dimensions = dimensions) {
+        ProvideAppTypography(typography = typography) {
+            MaterialTheme(
+                colorScheme = colors,
+                typography = chatTypography,
+                content = content
+            )
+        }
+    }
 }
