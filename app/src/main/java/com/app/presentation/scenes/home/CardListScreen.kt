@@ -1,6 +1,9 @@
 package com.app.presentation.scenes.home
 
+import android.widget.ScrollView
 import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.Orientation
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -13,6 +16,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -59,6 +63,8 @@ fun CardListScreen(openCard: (Card) -> Unit) {
     val view = remember { createView() }
     val viewModel = getViewModel<CardListViewModel>()
     val currentTime = remember { mutableStateOf<LocalDateTime>(LocalDateTime.now()) }
+    val scrollState = rememberScrollState()
+
     LaunchedEffect(key1 = "CardListScreen") {
         viewModel.attach(view)
         currentTime.value = LocalDateTime.now()
@@ -76,29 +82,40 @@ fun CardListScreen(openCard: (Card) -> Unit) {
         }
     ) { uiState ->
         uiState.toContent { cards: List<Card> ->
-            Column(modifier = Modifier.padding(start = SupportScreenSize.dimens.dimens_40, end = SupportScreenSize.dimens.dimens_40, top = SupportScreenSize.dimens.dimens_24)) {
-                Text(stringResource(id = R.string.noCheckIn))
-                CardList(
-                    cards = cards,
-                    isRefresh = uiState.isRefresh,
-                    onClick = {
-                        view.uiStateFlow.clearSnackMessage()
-                        openCard(it)
-                    },
-                    onCheck = { checkIntent.tryEmit(it) },
-                    onRefresh = { refreshIntent.tryEmit(Unit) }
-                )
-                Text(stringResource(id = R.string.checkIn))
-                CardGrid(
-                    cards = cards,
-                    isRefresh = uiState.isRefresh,
-                    onClick = {
-                        view.uiStateFlow.clearSnackMessage()
-                        openCard(it)
-                    },
-                    onCheck = { checkIntent.tryEmit(it) },
-                    onRefresh = { refreshIntent.tryEmit(Unit) }
-                )
+            Box(
+                modifier = Modifier
+                    .scrollable(state = scrollState, orientation = Orientation.Vertical)
+            ) {
+                Column(
+                    modifier = Modifier.padding(
+                        start = SupportScreenSize.dimens.dimens_40,
+                        end = SupportScreenSize.dimens.dimens_40,
+                        top = SupportScreenSize.dimens.dimens_24
+                    )
+                ) {
+                    Text(stringResource(id = R.string.noCheckIn), style = SupportScreenSize.textStyle.text14Regular.copy(color = color999999))
+                    CardList(
+                        cards = cards,
+                        isRefresh = uiState.isRefresh,
+                        onClick = {
+                            view.uiStateFlow.clearSnackMessage()
+                            openCard(it)
+                        },
+                        onCheck = { checkIntent.tryEmit(it) },
+                        onRefresh = { refreshIntent.tryEmit(Unit) }
+                    )
+                    Text(stringResource(id = R.string.checkIn), style = SupportScreenSize.textStyle.text14Regular.copy(color = color999999))
+                    CardGrid(
+                        cards = cards,
+                        isRefresh = uiState.isRefresh,
+                        onClick = {
+                            view.uiStateFlow.clearSnackMessage()
+                            openCard(it)
+                        },
+                        onCheck = { checkIntent.tryEmit(it) },
+                        onRefresh = { refreshIntent.tryEmit(Unit) }
+                    )
+                }
             }
         }
     }
@@ -152,26 +169,48 @@ private fun HeaderCheckIn() {
             .background(colorDCF1DD)
     ) {
         Row(
-            modifier = Modifier.fillMaxSize().padding(start = SupportScreenSize.dimens.dimens_16, top = SupportScreenSize.dimens.dimens_4),
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(start = SupportScreenSize.dimens.dimens_16, top = SupportScreenSize.dimens.dimens_4),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Column(modifier = Modifier.weight(1f).wrapContentHeight(align = Alignment.CenterVertically)) {
+            Column(
+                modifier = Modifier
+                    .weight(1f)
+                    .wrapContentHeight(align = Alignment.CenterVertically)
+            ) {
                 Text(text = stringResource(id = R.string.present), style = SupportScreenSize.textStyle.text14SemiBold.copy(color = color999999))
                 Text(text = "10", style = SupportScreenSize.textStyle.text26Bold.copy(fontWeight = FontWeight.SemiBold, color = color3E9346))
             }
-            Column(modifier = Modifier.weight(1f).wrapContentHeight(align = Alignment.CenterVertically)) {
+            Column(
+                modifier = Modifier
+                    .weight(1f)
+                    .wrapContentHeight(align = Alignment.CenterVertically)
+            ) {
                 Text(text = stringResource(id = R.string.off_), style = SupportScreenSize.textStyle.text14SemiBold.copy(color = color999999))
                 Text(text = "1", style = SupportScreenSize.textStyle.text26Bold.copy(fontWeight = FontWeight.SemiBold, color = colorF7AD1A))
             }
-            Column(modifier = Modifier.weight(1f).wrapContentHeight(align = Alignment.CenterVertically)) {
+            Column(
+                modifier = Modifier
+                    .weight(1f)
+                    .wrapContentHeight(align = Alignment.CenterVertically)
+            ) {
                 Text(text = stringResource(id = R.string.confirm_off), style = SupportScreenSize.textStyle.text14SemiBold.copy(color = color999999))
                 Text(text = "1", style = SupportScreenSize.textStyle.text26Bold.copy(fontWeight = FontWeight.SemiBold, color = colorF27F0C))
             }
-            Column(modifier = Modifier.weight(1f).wrapContentHeight(align = Alignment.CenterVertically)) {
+            Column(
+                modifier = Modifier
+                    .weight(1f)
+                    .wrapContentHeight(align = Alignment.CenterVertically)
+            ) {
                 Text(text = stringResource(id = R.string.confirm_delay), style = SupportScreenSize.textStyle.text14SemiBold.copy(color = color999999))
                 Text(text = "1", style = SupportScreenSize.textStyle.text26Bold.copy(fontWeight = FontWeight.SemiBold, color = color8939DA))
             }
-            Column(modifier = Modifier.weight(1f).wrapContentHeight(align = Alignment.CenterVertically)) {
+            Column(
+                modifier = Modifier
+                    .weight(1f)
+                    .wrapContentHeight(align = Alignment.CenterVertically)
+            ) {
                 Text(text = stringResource(id = R.string.off), style = SupportScreenSize.textStyle.text14SemiBold.copy(color = color999999))
                 Text(text = "2", style = SupportScreenSize.textStyle.text26Bold.copy(fontWeight = FontWeight.SemiBold, color = colorEA1911))
             }
