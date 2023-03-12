@@ -45,6 +45,7 @@ ext {
     systemuicontroller          = "com.google.accompanist:accompanist-systemuicontroller:0.28.0"
     customviewPoolingContainer  = "androidx.customview:customview-poolingcontainer:1.0.0"
     coilCompose                 = "io.coil-kt:coil-compose:2.2.0"
+    padRecyclerview             = "com.rubensousa.dpadrecyclerview:dpadrecyclerview-compose:1.0.0-alpha05"
 
     // NAVIGATION
     navigationVersion           = '2.5.3'

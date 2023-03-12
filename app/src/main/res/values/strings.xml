@@ -4,4 +4,15 @@
     <string name="error_generic">An error has occurred</string>
     <string name="error_persistence">Persistence data error</string>
     <string name="error_no_connection">No connection</string>
+    <string name="checkIn">Đã điểm danh</string>
+    <string name="noCheckIn">Chưa điểm danh</string>
+    <string name="verify_in_class">Điểm danh vào lớp</string>
+    <string name="verify">Đã xác nhận </string>
+    <string name="teacher">Giáo viên phụ trách:</string>
+    <string name="nanny">Bảo Mẫu:</string>
+    <string name="present">Đã có mặt</string>
+    <string name="off_">Vắng có phép</string>
+    <string name="confirm_off">Xác nhận vắng</string>
+    <string name="confirm_delay">Xin vào trễ</string>
+    <string name="off">Đang vắng mặt</string>
 </resources>

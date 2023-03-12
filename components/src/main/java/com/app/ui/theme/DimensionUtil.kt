@@ -8,6 +8,7 @@ class Dimensions(
     val dimens_16: Dp,
     val dimens_24: Dp,
     val dimens_27: Dp,
+    val dimens_40: Dp,
     val dimens_80: Dp,
 )
 
@@ -16,6 +17,7 @@ val normalDimension = Dimensions(
     dimens_16 = 16.dp,
     dimens_24 = 24.dp,
     dimens_27 = 27.dp,
+    dimens_40 = 40.dp,
     dimens_80 = 80.dp,
 )
 
@@ -24,5 +26,6 @@ val D2100Dimension = Dimensions(
     dimens_16 = 37.dp,
     dimens_24 = 55.dp,
     dimens_27 = 62.dp,
+    dimens_40 = 92.dp,
     dimens_80 = 184.dp,
 )

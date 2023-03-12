@@ -1,30 +1,30 @@
 package com.app.presentation.scenes.home
 
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material3.Divider
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
 import com.app.domain.model.Card
+import com.app.presentation.R
 import com.app.presentation.scenes.base.PublishSharedFlow
 import com.app.ui.card.CardGrid
 import com.app.ui.card.CardList
@@ -76,16 +76,30 @@ fun CardListScreen(openCard: (Card) -> Unit) {
         }
     ) { uiState ->
         uiState.toContent { cards: List<Card> ->
-            CardList(
-                cards = cards,
-                isRefresh = uiState.isRefresh,
-                onClick = {
-                    view.uiStateFlow.clearSnackMessage()
-                    openCard(it)
-                },
-                onCheck = { checkIntent.tryEmit(it) },
-                onRefresh = { refreshIntent.tryEmit(Unit) }
-            )
+            Column(modifier = Modifier.padding(start = SupportScreenSize.dimens.dimens_40, end = SupportScreenSize.dimens.dimens_40, top = SupportScreenSize.dimens.dimens_24)) {
+                Text(stringResource(id = R.string.noCheckIn))
+                CardList(
+                    cards = cards,
+                    isRefresh = uiState.isRefresh,
+                    onClick = {
+                        view.uiStateFlow.clearSnackMessage()
+                        openCard(it)
+                    },
+                    onCheck = { checkIntent.tryEmit(it) },
+                    onRefresh = { refreshIntent.tryEmit(Unit) }
+                )
+                Text(stringResource(id = R.string.checkIn))
+                CardGrid(
+                    cards = cards,
+                    isRefresh = uiState.isRefresh,
+                    onClick = {
+                        view.uiStateFlow.clearSnackMessage()
+                        openCard(it)
+                    },
+                    onCheck = { checkIntent.tryEmit(it) },
+                    onRefresh = { refreshIntent.tryEmit(Unit) }
+                )
+            }
         }
     }
 }
@@ -100,30 +114,29 @@ private fun HeaderTitle(currentTime: LocalDateTime) {
             Column {
                 Text(text = "Lớp Mickey 01 - WorldKids Bình Tân", maxLines = 1, style = SupportScreenSize.textStyle.text36Bold)
                 Row {
-                    Text(text = "Giáo viên phụ trách:", maxLines = 1, style = SupportScreenSize.textStyle.text20Regular)
+                    Text(text = stringResource(id = R.string.teacher), maxLines = 1, style = SupportScreenSize.textStyle.text20Regular)
                     Spacer(modifier = Modifier.width(SupportScreenSize.dimens.dimens_4))
                     Text(text = "Nguyễn Thị Kim Anh", maxLines = 1, style = SupportScreenSize.textStyle.text20Bold.copy(color = color3E9346))
                     Spacer(modifier = Modifier.width(SupportScreenSize.dimens.dimens_16))
-                    Text(text = "Bảo Mẫu:", maxLines = 1, style = SupportScreenSize.textStyle.text20Regular)
+                    Text(text = stringResource(id = R.string.nanny), maxLines = 1, style = SupportScreenSize.textStyle.text20Regular)
                     Spacer(modifier = Modifier.width(SupportScreenSize.dimens.dimens_4))
                     Text(text = "Nguyễn Như Ngọc", maxLines = 1, style = SupportScreenSize.textStyle.text20Bold.copy(color = color3E9346))
                 }
             }
             Column {
-                Text(text = "Điểm danh vào lớp", maxLines = 1, style = SupportScreenSize.textStyle.text14Bold)
-                Text(text = "Đã xác nhận ", maxLines = 1, style = SupportScreenSize.textStyle.text14Bold)
+                Text(text = stringResource(id = R.string.verify_in_class), maxLines = 1, style = SupportScreenSize.textStyle.text14Bold)
+                Text(text = stringResource(id = R.string.verify), maxLines = 1, style = SupportScreenSize.textStyle.text14Bold)
             }
-            Column {
+            Column(modifier = Modifier.wrapContentWidth(align = Alignment.End), horizontalAlignment = Alignment.End) {
                 Text(
                     text = currentTime.format(DateTimeFormatter.ofPattern("HH:mm")),
                     maxLines = 1,
-                    textAlign = TextAlign.End,
-                    style = SupportScreenSize.textStyle.text48Bold.copy(color3E9346)
+                    style = SupportScreenSize.textStyle.text48Bold.copy(color3968DA)
                 )
                 Text(
                     text = currentTime.format(DateTimeFormatter.ofPattern("EEEE, d MMMM yyyy")),
                     maxLines = 1,
-                    style = SupportScreenSize.textStyle.text24Regular.copy(color3E9346)
+                    style = SupportScreenSize.textStyle.text24Regular.copy(color3968DA)
                 )
             }
         }
@@ -139,27 +152,27 @@ private fun HeaderCheckIn() {
             .background(colorDCF1DD)
     ) {
         Row(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier.fillMaxSize().padding(start = SupportScreenSize.dimens.dimens_16, top = SupportScreenSize.dimens.dimens_4),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Column(modifier = Modifier.fillMaxHeight()) {
-                Text(text = "Đã có mặt", style = SupportScreenSize.textStyle.text14SemiBold.copy(color = color999999))
+            Column(modifier = Modifier.weight(1f).wrapContentHeight(align = Alignment.CenterVertically)) {
+                Text(text = stringResource(id = R.string.present), style = SupportScreenSize.textStyle.text14SemiBold.copy(color = color999999))
                 Text(text = "10", style = SupportScreenSize.textStyle.text26Bold.copy(fontWeight = FontWeight.SemiBold, color = color3E9346))
             }
-            Column {
-                Text(text = "Vắng có phép", style = SupportScreenSize.textStyle.text14SemiBold.copy(color = color999999))
+            Column(modifier = Modifier.weight(1f).wrapContentHeight(align = Alignment.CenterVertically)) {
+                Text(text = stringResource(id = R.string.off_), style = SupportScreenSize.textStyle.text14SemiBold.copy(color = color999999))
                 Text(text = "1", style = SupportScreenSize.textStyle.text26Bold.copy(fontWeight = FontWeight.SemiBold, color = colorF7AD1A))
             }
-            Column {
-                Text(text = "Xác nhận vắng", style = SupportScreenSize.textStyle.text14SemiBold.copy(color = color999999))
+            Column(modifier = Modifier.weight(1f).wrapContentHeight(align = Alignment.CenterVertically)) {
+                Text(text = stringResource(id = R.string.confirm_off), style = SupportScreenSize.textStyle.text14SemiBold.copy(color = color999999))
                 Text(text = "1", style = SupportScreenSize.textStyle.text26Bold.copy(fontWeight = FontWeight.SemiBold, color = colorF27F0C))
             }
-            Column {
-                Text(text = "Xin vào trễ", style = SupportScreenSize.textStyle.text14SemiBold.copy(color = color999999))
+            Column(modifier = Modifier.weight(1f).wrapContentHeight(align = Alignment.CenterVertically)) {
+                Text(text = stringResource(id = R.string.confirm_delay), style = SupportScreenSize.textStyle.text14SemiBold.copy(color = color999999))
                 Text(text = "1", style = SupportScreenSize.textStyle.text26Bold.copy(fontWeight = FontWeight.SemiBold, color = color8939DA))
             }
-            Column {
-                Text(text = "Đang vắng mặt", style = SupportScreenSize.textStyle.text14SemiBold.copy(color = color999999))
+            Column(modifier = Modifier.weight(1f).wrapContentHeight(align = Alignment.CenterVertically)) {
+                Text(text = stringResource(id = R.string.off), style = SupportScreenSize.textStyle.text14SemiBold.copy(color = color999999))
                 Text(text = "2", style = SupportScreenSize.textStyle.text26Bold.copy(fontWeight = FontWeight.SemiBold, color = colorEA1911))
             }
         }
