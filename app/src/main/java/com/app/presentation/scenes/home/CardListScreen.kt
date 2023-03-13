@@ -96,24 +96,18 @@ fun CardListScreen(openCard: (Card) -> Unit) {
                     Text(stringResource(id = R.string.noCheckIn), style = SupportScreenSize.textStyle.text14Regular.copy(color = color999999))
                     CardList(
                         cards = cards,
-                        isRefresh = uiState.isRefresh,
                         onClick = {
                             view.uiStateFlow.clearSnackMessage()
                             openCard(it)
                         },
-                        onCheck = { checkIntent.tryEmit(it) },
-                        onRefresh = { refreshIntent.tryEmit(Unit) }
                     )
                     Text(stringResource(id = R.string.checkIn), style = SupportScreenSize.textStyle.text14Regular.copy(color = color999999))
                     CardGrid(
                         cards = cards,
-                        isRefresh = uiState.isRefresh,
                         onClick = {
                             view.uiStateFlow.clearSnackMessage()
                             openCard(it)
                         },
-                        onCheck = { checkIntent.tryEmit(it) },
-                        onRefresh = { refreshIntent.tryEmit(Unit) }
                     )
                 }
             }

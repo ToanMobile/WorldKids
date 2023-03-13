@@ -1,6 +1,5 @@
 package com.app.ui.card
 
-import android.content.res.Configuration
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -23,11 +22,9 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import com.app.domain.model.Card
-import com.app.ui.theme.BaseTheme
 import com.app.ui.theme.SupportScreenSize
 import com.app.ui.theme.color8939DA
 
@@ -35,8 +32,7 @@ import com.app.ui.theme.color8939DA
 fun CardItem(
     card: Card,
     isBig: Boolean = false,
-    onClick: ((Card) -> Unit)? = null,
-    onCheck: Boolean = false
+    onClick: ((Card) -> Unit)? = null
 ) {
     Column(
         modifier = Modifier
@@ -92,20 +88,5 @@ fun CardItem(
             textAlign = TextAlign.Center,
             style = SupportScreenSize.textStyle.text10Bold
         )
-    }
-}
-
-@Preview(
-    name = "Light Mode",
-    showBackground = true
-)
-@Preview(
-    name = "Dark Mode",
-    uiMode = Configuration.UI_MODE_NIGHT_YES
-)
-@Composable
-private fun Preview() {
-    BaseTheme {
-        CardListItem(ConstantPreviewCard.CARD, onCheck = false)
     }
 }
