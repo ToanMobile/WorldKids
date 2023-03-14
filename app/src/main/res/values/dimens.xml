@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="list_margin_start">60dp</dimen>
+    <dimen name="grid_item_spacing">24dp</dimen>
+    <dimen name="adapter_item_height">200dp</dimen>
+    <dimen name="selection_overlay_stroke_width">4dp</dimen>
+    <dimen name="corner_size">8dp</dimen>
+    <dimen name="list_item_width">135dp</dimen>
+    <dimen name="list_item_height">180dp</dimen>
+    <string name="list_item_aspect_ratio">3:4</string>
+</resources>

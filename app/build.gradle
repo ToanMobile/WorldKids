@@ -1,18 +1,14 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
-    id 'com.google.devtools.ksp'
-    id 'androidx.navigation.safeargs.kotlin'
-    id 'org.jlleitschuh.gradle.ktlint'
-    id 'com.github.ben-manes.versions'
-    id 'com.adarshr.test-logger'
+    id 'androidx.navigation.safeargs'
 }
 
 android {
     compileSdk androidCompileSdkVersion
-    namespace 'com.app.presentation'
+    namespace 'com.app.worldkids'
     defaultConfig {
-        applicationId "com.khoi.pokecardcompose"
+        applicationId "com.app.worldkids"
         minSdk androidMinSdkVersion
         targetSdk androidTargetSdkVersion
         versionCode androidVersionCode
@@ -41,22 +37,19 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt')
         }
     }
-    applicationVariants.all { variant ->
-        // KSP - To use generated sources
-        variant.addJavaSourceFoldersToModel(file("build/generated/ksp/${variant.name}/kotlin"))
-    }
     buildFeatures {
         compose = true
+        viewBinding = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion composeCompilerVersion
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_17
-        targetCompatibility JavaVersion.VERSION_17
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
     kotlin {
-        jvmToolchain(17)
+        jvmToolchain(11)
     }
 }
 
@@ -66,37 +59,26 @@ ktlint {
 }
 
 dependencies {
-    // MODULE
-    implementation project(':data')
-    implementation project(':domain')
-    implementation project(':components')
+    implementation constraintlayout
+    implementation lifecycle
+    implementation viewmodel
+    implementation timber
 
-    // KOTLIN
-    implementation kotlinStdlib
-    // ANDROIDX
     implementation androidXAppCompat
-    implementation androidXPreference
-    implementation multidex
-    // KOIN
-    implementation koinCore
-    implementation koinAndroid
-    implementation koinAnnotations
-    implementation koinCompose
-    ksp koinCompiler
-    // NAVIGATION
-    implementation navigationCompose
+    implementation recyclerview
+    implementation poolingcontainer
+    implementation padRecyclerview
+    implementation padCompose
+    implementation composeUI
 
-    // TEST
-    testImplementation junit
-    testImplementation mockitoInline
-    testImplementation mockitoKotlin
-    implementation kotlinxCoroutinesTest
+    implementation navigationFragment
+    implementation navigationUi
 
-    // ANDROID TEST
-    androidTestImplementation androidXTestJunit
-    androidTestImplementation composeUiTestJunit
-    debugImplementation composeUiTestManifest
-
-    // DEPENDENCY CHECK STRATEGY
-    dependencyUpdates.resolutionStrategy dependencyUpdatesStrategy
+    implementation kotlinxCoroutinesCore
+    implementation ktorClientCore
+    implementation ktorClientOkHttp
+    implementation ktorSerializationJson
+    implementation coil
+    implementation androidMaterial
+    implementation androidXCore
 }
