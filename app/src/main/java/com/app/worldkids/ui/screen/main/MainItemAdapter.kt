@@ -18,31 +18,25 @@ package com.app.worldkids.ui.screen.main
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.ListAdapter
+import com.app.worldkids.R
 import com.app.worldkids.databinding.AdapterItemGridBinding
-import com.app.worldkids.ui.model.ListTypes
-import com.app.worldkids.ui.widgets.item.MutableGridAdapter
+import com.mikepenz.fastadapter.binding.AbstractBindingItem
 
-class MainItemAdapter(private val onItemClickListener: MainItemViewHolder.ItemClickListener) :
-    ListAdapter<Int, MainItemViewHolder>(MutableGridAdapter.DIFF_CALLBACK) {
+class MainItemAdapter : AbstractBindingItem<AdapterItemGridBinding>() {
+    private var mImageUrl: String? = null
+    private var mName: String? = null
+    private var mDescription: String? = null
+    private var isPlaceholder: Boolean =
+        false // True when used as placeholderInterceptor by PagedModelAdapter
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainItemViewHolder {
-        return MainItemViewHolder(
-            AdapterItemGridBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        )
+    override val type: Int
+        get() = R.id.fastadapter_simple_image_item_id
+
+    override fun bindView(binding: AdapterItemGridBinding, payloads: List<Any>) {
+        //binding.name.text = name
     }
 
-    override fun onBindViewHolder(holder: MainItemViewHolder, position: Int) {
-        return holder.bind(getItem(position), onItemClickListener)
+    override fun createBinding(inflater: LayoutInflater, parent: ViewGroup?): AdapterItemGridBinding {
+        return AdapterItemGridBinding.inflate(inflater, parent, false)
     }
-
-    override fun onViewRecycled(holder: MainItemViewHolder) {
-        super.onViewRecycled(holder)
-        holder.recycle()
-    }
-
-    override fun getItemViewType(position: Int): Int {
-        return ListTypes.ITEM
-    }
-
 }

@@ -67,8 +67,8 @@ dependencies {
     implementation androidXAppCompat
     implementation recyclerview
     implementation poolingcontainer
-    implementation padRecyclerview
-    implementation padCompose
+    implementation fastAdapter
+    implementation fastBindingAdapter
     implementation composeUI
 
     implementation navigationFragment

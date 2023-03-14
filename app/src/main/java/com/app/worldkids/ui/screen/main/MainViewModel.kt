@@ -7,6 +7,8 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 class MainViewModel : ViewModel() {
 
@@ -17,10 +19,16 @@ class MainViewModel : ViewModel() {
 
     val loadingState: LiveData<Boolean> = loadingStateLiveData
     val listState: LiveData<MutableList<Int>> = listLiveData
-
+    val currentHours = MutableLiveData<String>()
+    val currentTime = MutableLiveData<String>()
     init {
         list.addAll(createPage())
-        listLiveData.postValue(ArrayList(list))
+        listLiveData.postValue(list)
+        viewModelScope.launch(Dispatchers.IO) {
+            val localTime = LocalDateTime.now()
+            currentHours.postValue(localTime.format(DateTimeFormatter.ofPattern("HH:mm")))
+            currentTime.postValue(localTime.format(DateTimeFormatter.ofPattern("EEEE, d MMMM yyyy")))
+        }
     }
 
     fun loadMore(selectedPosition: Int, spanCount: Int) {

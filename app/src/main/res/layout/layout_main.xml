@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright 2023 Rúben Sousa
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/headerTitle"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimens_150"
+            android:orientation="horizontal"
+            android:padding="@dimen/dimens_24">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.5"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Lớp Mickey 01 - WorldKids Bình Tân"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text36sp"
+                    android:textStyle="bold" />
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/dimens_8"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/teacher"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text20sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dimens_4"
+                        android:text="Nguyễn Thị Kim Anh"
+                        android:textColor="@color/color3E9346"
+                        android:textSize="@dimen/text20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dimens_8"
+                        android:text="@string/nanny"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text20sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dimens_4"
+                        android:text="Nguyễn Như Ngọc"
+                        android:textColor="@color/color3E9346"
+                        android:textSize="@dimen/text20sp"
+                        android:textStyle="bold" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="end|center_vertical"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/verify_in_class"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text14sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimens_4"
+                    android:text="@string/verify"
+                    android:textColor="@color/color3E9346"
+                    android:textSize="@dimen/text14sp"
+                    android:textStyle="bold" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.8"
+                android:gravity="end"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txtTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/verify_in_class"
+                    android:textColor="@color/color3968DA"
+                    android:textSize="@dimen/text48sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtDatetime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimens_4"
+                    android:text="@string/verify"
+                    android:textColor="@color/color3968DA"
+                    android:textSize="@dimen/text24sp" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/headerCheckIn"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimens_80"
+            android:background="@color/colorDCF1DD"
+            android:orientation="horizontal"
+            android:paddingHorizontal="@dimen/dimens_24"
+            android:paddingTop="@dimen/dimens_8"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/headerTitle">
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TableRow android:weightSum="5">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/present"
+                        android:textColor="@color/color999999"
+                        android:textSize="@dimen/text14sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/off_"
+                        android:textColor="@color/color999999"
+                        android:textSize="@dimen/text14sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/confirm_off"
+                        android:textColor="@color/color999999"
+                        android:textSize="@dimen/text14sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/confirm_delay"
+                        android:textColor="@color/color999999"
+                        android:textSize="@dimen/text14sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/off"
+                        android:textColor="@color/color999999"
+                        android:textSize="@dimen/text14sp"
+                        android:textStyle="bold" />
+                </TableRow>
+
+                <TableRow android:weightSum="5">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="10"
+                        android:textColor="@color/color3E9346"
+                        android:textSize="@dimen/text26sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="10"
+                        android:textColor="@color/colorF7AD1A"
+                        android:textSize="@dimen/text26sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="10"
+                        android:textColor="@color/colorF27F0C"
+                        android:textSize="@dimen/text26sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="10"
+                        android:textColor="@color/color8939DA"
+                        android:textSize="@dimen/text26sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="10"
+                        android:textColor="@color/colorEA1911"
+                        android:textSize="@dimen/text26sp"
+                        android:textStyle="bold" />
+                </TableRow>
+            </TableLayout>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <TextView
+            android:id="@+id/txtNoCheckIn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/dimens_40"
+            android:layout_marginTop="@dimen/dimens_24"
+            android:text="@string/noCheckIn"
+            android:textColor="@color/color999999"
+            android:textSize="@dimen/text14sp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcvNoCheckIn"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimens_160"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:layout_marginHorizontal="@dimen/dimens_40"
+            android:layout_marginTop="@dimen/dimens_24" />
+
+        <TextView
+            android:id="@+id/txtCheckIn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/dimens_40"
+            android:layout_marginTop="@dimen/dimens_24"
+            android:text="@string/checkIn"
+            android:textColor="@color/color999999"
+            android:textSize="@dimen/text14sp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcvCheckIn"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimens_275"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            android:layout_marginHorizontal="@dimen/dimens_40"
+            android:layout_marginTop="@dimen/dimens_24" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</androidx.core.widget.NestedScrollView>

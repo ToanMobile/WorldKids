@@ -21,20 +21,20 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.app.worldkids.R
-import com.app.worldkids.databinding.ScreenTvDetailBinding
+import com.app.worldkids.databinding.LayoutDetailBinding
 
-class DetailFragment : Fragment(R.layout.screen_tv_detail) {
+class DetailFragment : Fragment(R.layout.layout_detail) {
 
-    private var _binding: ScreenTvDetailBinding? = null
-    private val binding: ScreenTvDetailBinding get() = _binding!!
+    private var _binding: LayoutDetailBinding? = null
+    private val binding: LayoutDetailBinding get() = _binding!!
     private val viewModel by viewModels<DetailViewModel>()
     //private val listController = DetailListController()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        _binding = ScreenTvDetailBinding.bind(view)
-        val recyclerView = binding.recyclerView
-        /* listController.setup(recyclerView, viewLifecycleOwner, onSelected = { position ->
+        _binding = LayoutDetailBinding.bind(view)
+        /* val recyclerView = binding.recyclerView
+        listController.setup(recyclerView, viewLifecycleOwner, onSelected = { position ->
             viewModel.loadMore(position)
         })
        binding.up.setOnClickListener {
