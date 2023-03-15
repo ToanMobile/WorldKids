@@ -21,6 +21,7 @@ import android.os.Handler
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import coil.load
 import com.app.worldkids.R
 import com.app.worldkids.databinding.LayoutMainBinding
 import com.app.worldkids.ui.viewBinding
@@ -71,8 +72,9 @@ class MainFragment : Fragment(R.layout.layout_main) {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupRecyclerView()
         setupTime()
+        setupRecyclerViewNoCheckIn()
+        setupRecyclerViewCheckIn()
     }
 
     private fun setupTime() {
@@ -84,14 +86,18 @@ class MainFragment : Fragment(R.layout.layout_main) {
         }
     }
 
-    private fun setupRecyclerView() {
+    private fun setupRecyclerViewNoCheckIn() {
         val itemAdapter = ItemAdapter<MainItem>()
         val fastAdapter = FastAdapter.with(itemAdapter)
-        Handler().postDelayed({
-            //add some dummy data
-            itemAdapter.add(simpleImageItems)
-        }, 50)
+        itemAdapter.add(simpleImageItems)
         binding.rcvNoCheckIn.adapter = fastAdapter
+    }
+
+    private fun setupRecyclerViewCheckIn() {
+        val itemAdapter = ItemAdapter<MainItem>()
+        val fastAdapter = FastAdapter.with(itemAdapter)
+        itemAdapter.add(simpleImageItems)
+        binding.rcvCheckIn.adapter = fastAdapter
     }
 
 }

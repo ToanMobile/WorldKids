@@ -4,12 +4,11 @@ import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import coil.dispose
-import coil.load
 import com.app.worldkids.R
 import com.app.worldkids.utils.FastAdapterUIUtils
+import com.bumptech.glide.Glide
 import com.mikepenz.fastadapter.IItemVHFactory
 import com.mikepenz.fastadapter.items.BaseItem
 import com.mikepenz.fastadapter.items.BaseItemFactory
@@ -91,10 +90,19 @@ class MainItem : BaseItem<MainItem.ViewHolder>() {
             50,
             true
         )
-
         //load glide
-        holder.imageView.load(mImageUrl) {
+        /*holder.imageView.load(mImageUrl) {
             crossfade(true)
+            placeholder(R.drawable.baseline_person_pin_24)
+            transformations(CircleCropTransformation())
+        }*/
+        Glide.with(holder.view).load(mImageUrl).into(holder.imageView)
+        holder.itemView.setOnFocusChangeListener { v, hasFocus ->
+            if (hasFocus) {
+                v.animate().scaleX(1.1f).scaleY(1.1f).setDuration(100).start()
+            } else {
+                v.animate().scaleX(1.0f).scaleY(1.0f).setDuration(100).start()
+            }
         }
     }
 
@@ -111,11 +119,11 @@ class MainItem : BaseItem<MainItem.ViewHolder>() {
      */
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         var view: FrameLayout = view as FrameLayout
-        var imageView: ImageView = view.findViewById(R.id.item_image_img)
+        var imageView: ImageView = view.findViewById(R.id.imgAvatar)
         var imageName: TextView = view.findViewById(R.id.item_image_name)
         var imageDescription: TextView = view.findViewById(R.id.item_image_description)
 
-        init {
+       /* init {
             //optimization to preset the correct height for our device
             val screenWidth = view.context.resources.displayMetrics.widthPixels
             val finalHeight = (screenWidth / 1.5).toInt() / 2
@@ -126,7 +134,7 @@ class MainItem : BaseItem<MainItem.ViewHolder>() {
             val lp = imageView.layoutParams as FrameLayout.LayoutParams
             lp.height = finalHeight
             imageView.layoutParams = lp
-        }
+        }*/
     }
 }
 

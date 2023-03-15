@@ -289,6 +289,5 @@
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             android:layout_marginHorizontal="@dimen/dimens_40"
             android:layout_marginTop="@dimen/dimens_24" />
-
     </androidx.appcompat.widget.LinearLayoutCompat>
 </androidx.core.widget.NestedScrollView>

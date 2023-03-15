@@ -1,24 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="@dimen/dimens_160"
     android:layout_height="@dimen/dimens_160"
-    android:layout_margin="@dimen/dimens_8"
-    android:orientation="vertical"
-    tools:ignore="MissingPrefix">
+    android:layout_margin="@dimen/dimens_8">
 
     <ImageView
-        android:id="@+id/item_image_img"
+        android:id="@+id/imgAvatar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:adjustViewBounds="false"
-        android:scaleType="centerCrop" />
+        android:scaleType="centerCrop"
+        android:contentDescription="null" />
 
     <FrameLayout
         android:id="@+id/item_image_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/color999999"
+        android:background="@color/transparent"
+        android:visibility="gone"
         android:foreground="?selectableItemBackgroundBorderless"
         android:orientation="vertical">
 
