@@ -74,10 +74,18 @@ dependencies {
     implementation navigationUi
 
     implementation kotlinxCoroutinesCore
-    implementation ktorClientCore
-    implementation ktorClientOkHttp
-    implementation ktorSerializationJson
     implementation coil
     implementation androidMaterial
     implementation androidXCore
+
+    //Koin
+    implementation koinCore
+    implementation koinAndroid
+
+    //Ktor
+    implementation ktorClientCore
+    implementation ktorClientOkHttp
+    implementation ktorSerializationJson
+    implementation ktorContentNegotiation
+    implementation ktorClientLogging
 }

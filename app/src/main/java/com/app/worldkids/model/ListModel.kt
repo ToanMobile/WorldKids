@@ -14,10 +14,12 @@
  * limitations under the License.
  */
 
-package com.app.worldkids.ui.model
+package com.app.worldkids.model
 
 import com.idanatz.oneadapter.external.interfaces.Diffable
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class ListMode(
     val id: Long = 0L,
     val title: String? = null,

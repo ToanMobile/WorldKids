@@ -4,13 +4,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.app.worldkids.data.repository.NetworkRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
-class MainViewModel : ViewModel() {
+class MainViewModel(networkRepository: NetworkRepository) : ViewModel() {
     //http://139.180.155.164:3002/api/admin/checkin/6/list-checkin
     private val list = ArrayList<Int>()
     private val listLiveData = MutableLiveData<MutableList<Int>>()
@@ -22,6 +23,9 @@ class MainViewModel : ViewModel() {
     val currentHours = MutableLiveData<String>()
     val currentTime = MutableLiveData<String>()
     init {
+        viewModelScope.launch {
+            networkRepository.getWordKidsList()
+        }
         list.addAll(createPage())
         listLiveData.postValue(list)
         viewModelScope.launch(Dispatchers.IO) {

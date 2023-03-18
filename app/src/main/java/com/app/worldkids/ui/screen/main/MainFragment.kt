@@ -19,17 +19,17 @@ package com.app.worldkids.ui.screen.main
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import com.app.worldkids.R
 import com.app.worldkids.databinding.LayoutMainBinding
-import com.app.worldkids.ui.model.ListMode
+import com.app.worldkids.model.ListMode
 import com.app.worldkids.ui.viewBinding
 import com.idanatz.oneadapter.OneAdapter
+import org.koin.androidx.viewmodel.ext.android.activityViewModel
 
 
 class MainFragment : Fragment(R.layout.layout_main) {
     private val binding by viewBinding(LayoutMainBinding::bind)
-    private val viewModel by viewModels<MainViewModel>()
+    private val viewModel by activityViewModel<MainViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
