@@ -2,6 +2,7 @@ allprojects {
     repositories {
         google()
         mavenCentral()
+        maven { url "https://jitpack.io" }
     }
 }
 
@@ -51,8 +52,8 @@ ext {
     coil                        = "io.coil-kt:coil:2.2.2"
     padRecyclerview             = "com.rubensousa.dpadrecyclerview:dpadrecyclerview:1.0.0-alpha05"
     padCompose                  = "com.rubensousa.dpadrecyclerview:dpadrecyclerview-compose:1.0.0-alpha05"
-    fastAdapter                 = "com.mikepenz:fastadapter:5.7.0"
-    fastBindingAdapter          = "com.mikepenz:fastadapter-extensions-binding:5.7.0"
+    fastAdapter                 = "com.github.idanatz:OneAdapter:2.1.5"
+
     // NAVIGATION
     navigationVersion           = '2.5.3'
     navigationFragment          = "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
@@ -80,7 +81,7 @@ ext {
     koinCompose                 = "io.insert-koin:koin-androidx-compose:$koinComposeVersion"
 
     // WEBSERVICES
-    ktorVersion                 = '2.2.3'
+    ktorVersion                 = '2.2.4'
     ktorClientCore              = "io.ktor:ktor-client-core:$ktorVersion"
     ktorClientOkHttp            = "io.ktor:ktor-client-okhttp:$ktorVersion"
     ktorSerializationJson       = "io.ktor:ktor-serialization-kotlinx-json:$ktorVersion"

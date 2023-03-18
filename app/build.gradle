@@ -68,7 +68,6 @@ dependencies {
     implementation recyclerview
     implementation poolingcontainer
     implementation fastAdapter
-    implementation fastBindingAdapter
     implementation composeUI
 
     implementation navigationFragment
@@ -81,6 +80,4 @@ dependencies {
     implementation coil
     implementation androidMaterial
     implementation androidXCore
-
-    implementation 'com.github.bumptech.glide:glide:4.15.0'
 }

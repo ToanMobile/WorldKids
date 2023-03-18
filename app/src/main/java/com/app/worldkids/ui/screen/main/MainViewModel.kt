@@ -11,7 +11,7 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 class MainViewModel : ViewModel() {
-
+    //http://139.180.155.164:3002/api/admin/checkin/6/list-checkin
     private val list = ArrayList<Int>()
     private val listLiveData = MutableLiveData<MutableList<Int>>()
     private val loadingStateLiveData = MutableLiveData<Boolean>()

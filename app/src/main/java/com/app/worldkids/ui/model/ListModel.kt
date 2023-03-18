@@ -16,11 +16,14 @@
 
 package com.app.worldkids.ui.model
 
-data class ListModel(
-    val title: String,
-    val items: MutableList<Int>,
-    val centerAligned: Boolean,
-    val isLeanback: Boolean
-) : ItemModel {
-    override val diffId: String = title
+import com.idanatz.oneadapter.external.interfaces.Diffable
+
+data class ListMode(
+    val id: Long = 0L,
+    val title: String? = null,
+    val des: String? = null,
+    val image: String? = null,
+) : Diffable {
+    override val uniqueIdentifier: Long = id
+    override fun areContentTheSame(other: Any): Boolean = title == (other as ListMode).title
 }
