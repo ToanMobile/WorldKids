@@ -22,9 +22,10 @@ class MainViewModel(networkRepository: NetworkRepository) : ViewModel() {
     val listState: LiveData<MutableList<Int>> = listLiveData
     val currentHours = MutableLiveData<String>()
     val currentTime = MutableLiveData<String>()
+
     init {
         viewModelScope.launch {
-            networkRepository.getWordKidsList()
+            networkRepository.register()
         }
         list.addAll(createPage())
         listLiveData.postValue(list)

@@ -9,6 +9,9 @@ class NetworkRepositoryImpl: NetworkRepository, KoinComponent {
 
     private val pokemonClient by inject<NetworkClient>()
 
+    override suspend fun register() {
+        pokemonClient.register()
+    }
     override suspend fun getWordKidsList(): Result<List<ListMode>> {
         return try {
             val response = pokemonClient.getPokemonList(page = 1)

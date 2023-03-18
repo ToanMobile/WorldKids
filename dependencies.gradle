@@ -82,7 +82,7 @@ ext {
 
     // WEBSERVICES
     ktorVersion                 = '2.2.4'
-    ktorClientCore              = "io.ktor:ktor-client-core:$ktorVersion"
+    ktorClientCore              = "io.ktor:ktor-client-android:$ktorVersion"
     ktorClientOkHttp            = "io.ktor:ktor-client-okhttp:$ktorVersion"
     ktorSerializationJson       = "io.ktor:ktor-serialization-kotlinx-json:$ktorVersion"
     ktorContentNegotiation      = "io.ktor:ktor-client-content-negotiation:$ktorVersion"
