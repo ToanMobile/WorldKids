@@ -30,7 +30,20 @@ import org.koin.androidx.viewmodel.ext.android.activityViewModel
 class MainFragment : Fragment(R.layout.layout_main) {
     private val binding by viewBinding(LayoutMainBinding::bind)
     private val viewModel by activityViewModel<MainViewModel>()
-
+    private val listFake = listOf(
+    ListMode(0, "Features Examples", "Title", "https://raw.githubusercontent.com/mikepenz/earthview-wallpapers/develop/thumb/salinas_grandes-argentina-25.jpg"),
+        ListMode(0, "Features Examples", "Title", "https://raw.githubusercontent.com/mikepenz/earthview-wallpapers/develop/thumb/salinas_grandes-argentina-25.jpg"),
+        ListMode(0, "Features Examples", "Title", "https://raw.githubusercontent.com/mikepenz/earthview-wallpapers/develop/thumb/salinas_grandes-argentina-25.jpg"),
+        ListMode(0, "Features Examples", "Title", "https://raw.githubusercontent.com/mikepenz/earthview-wallpapers/develop/thumb/salinas_grandes-argentina-25.jpg"),
+        ListMode(0, "Features Examples", "Title", "https://raw.githubusercontent.com/mikepenz/earthview-wallpapers/develop/thumb/salinas_grandes-argentina-25.jpg"),
+        ListMode(0, "Features Examples", "Title", "https://raw.githubusercontent.com/mikepenz/earthview-wallpapers/develop/thumb/salinas_grandes-argentina-25.jpg"),
+        ListMode(0, "Features Examples", "Title", "https://raw.githubusercontent.com/mikepenz/earthview-wallpapers/develop/thumb/salinas_grandes-argentina-25.jpg"),
+        ListMode(0, "Features Examples", "Title", "https://raw.githubusercontent.com/mikepenz/earthview-wallpapers/develop/thumb/salinas_grandes-argentina-25.jpg"),
+        ListMode(0, "Features Examples", "Title", "https://raw.githubusercontent.com/mikepenz/earthview-wallpapers/develop/thumb/salinas_grandes-argentina-25.jpg"),
+        ListMode(0, "Features Examples", "Title", "https://raw.githubusercontent.com/mikepenz/earthview-wallpapers/develop/thumb/salinas_grandes-argentina-25.jpg"),
+        ListMode(0, "Features Examples", "Title", "https://raw.githubusercontent.com/mikepenz/earthview-wallpapers/develop/thumb/salinas_grandes-argentina-25.jpg"),
+        ListMode(0, "Features Examples", "Title", "https://raw.githubusercontent.com/mikepenz/earthview-wallpapers/develop/thumb/salinas_grandes-argentina-25.jpg"),
+    )
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupTime()
@@ -51,18 +64,14 @@ class MainFragment : Fragment(R.layout.layout_main) {
         val oneAdapter = OneAdapter(binding.rcvNoCheckIn) {
             itemModules += MainModule()
         }
-        oneAdapter.setItems(listOf(
-            ListMode(0, "Features Examples", "Title", "https://raw.githubusercontent.com/mikepenz/earthview-wallpapers/develop/thumb/salinas_grandes-argentina-25.jpg"),
-        ))
+        oneAdapter.setItems(listFake)
     }
 
     private fun setupRecyclerViewCheckIn() {
         val oneAdapter = OneAdapter(binding.rcvCheckIn) {
             itemModules += MainModule()
         }
-        oneAdapter.setItems(listOf(
-            ListMode(0, "Features Examples", "Title", "https://raw.githubusercontent.com/mikepenz/earthview-wallpapers/develop/thumb/salinas_grandes-argentina-25.jpg"),
-        ))
+        oneAdapter.setItems(listFake)
     }
 
 }

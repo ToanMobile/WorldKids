@@ -21,6 +21,13 @@ class MainModule : ItemModule<ListMode>() {
                     placeholder(R.drawable.baseline_person_pin_24)
                     transformations(CircleCropTransformation())
                 }
+                itemRoot.setOnFocusChangeListener { v, hasFocus ->
+                    if (hasFocus) {
+                        v.setBackgroundResource(R.drawable.item_focus)
+                    } else {
+                        v.setBackgroundResource(R.drawable.item_no_focus)
+                    }
+                }
             }
         }
     }
