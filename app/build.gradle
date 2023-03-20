@@ -64,6 +64,8 @@ dependencies {
     implementation lifecycle
     implementation viewmodel
     implementation timber
+    implementation dataStore
+    implementation dataStorePre
 
     implementation androidXAppCompat
     implementation recyclerview

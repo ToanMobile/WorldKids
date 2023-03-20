@@ -1,10 +1,11 @@
 package com.app.worldkids.network.client
 
 import com.app.worldkids.model.ListMode
-import com.app.worldkids.model.RegisterRequest
+import com.app.worldkids.model.request.RegisterRequest
+import com.app.worldkids.model.response.RegisterResponse
 import com.app.worldkids.network.NetworkConstants
 import com.app.worldkids.network.helper.handleErrors
-import com.app.worldkids.network.model.PokemonResponse
+import com.app.worldkids.network.model.BaseResponse
 import com.app.worldkids.utils.DefaultCoroutineDispatchers
 import com.app.worldkids.utils.getAndroidID
 import io.ktor.client.HttpClient
@@ -21,18 +22,18 @@ class NetworkClient(
     private val coroutineDispatchers: DefaultCoroutineDispatchers
 ) {
 
-    suspend fun register() {
+    suspend fun register() : BaseResponse<RegisterResponse> {
         return handleErrors(coroutineDispatchers) {
             httpClient.post(NetworkConstants.Wordkids.register) {
                 contentType(ContentType.Application.Json)
-                setBody(Json.encodeToString(RegisterRequest(deviceToken = getAndroidID, image = "")))
+                setBody(Json.encodeToString(RegisterRequest(deviceId = getAndroidID)))
             }
         }
     }
 
     suspend fun getPokemonList(
         page: Long,
-    ): PokemonResponse {
+    ): RegisterResponse {
         return handleErrors(coroutineDispatchers) {
             httpClient.get(NetworkConstants.Wordkids.route) {
                 url {

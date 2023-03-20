@@ -1,5 +1,6 @@
 package com.app.worldkids.data.di
 
+import com.app.worldkids.data.DataStoreUtils
 import com.app.worldkids.data.repository.NetworkRepository
 import com.app.worldkids.data.repository.NetworkRepositoryImpl
 import com.app.worldkids.ui.screen.main.MainViewModel
@@ -11,8 +12,9 @@ import org.koin.dsl.bind
 import org.koin.dsl.module
 
 val dataModule = module {
+    singleOf(::DataStoreUtils)
     singleOf(::DefaultCoroutineDispatchers) bind CoroutineDispatchers::class
-    single<NetworkRepository> { NetworkRepositoryImpl() }
+    singleOf(::NetworkRepositoryImpl) bind NetworkRepository::class
 }
 
 val viewModelModule = module {
