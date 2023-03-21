@@ -20,7 +20,7 @@ val networkModule: (enableLogging: Boolean) -> Module
                 response("App_response")
                 build()
             }
-            single { createHttpClient(enableLogging, interceptor as Interceptor) }
+            single { createHttpClient(enableLogging, interceptor as Interceptor, get()) }
             single { NetworkClient(httpClient = get(), coroutineDispatchers = get()) }
         }
     }

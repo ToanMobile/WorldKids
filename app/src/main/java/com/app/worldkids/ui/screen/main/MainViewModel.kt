@@ -25,7 +25,8 @@ class MainViewModel(networkRepository: NetworkRepository) : ViewModel() {
 
     init {
         viewModelScope.launch {
-            networkRepository.register()
+            //networkRepository.register()
+            networkRepository.getListCheckIn()
         }
         list.addAll(createPage())
         listLiveData.postValue(list)

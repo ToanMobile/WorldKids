@@ -7,6 +7,7 @@ import io.ktor.client.call.body
 import io.ktor.client.statement.HttpResponse
 import io.ktor.utils.io.errors.IOException
 import kotlinx.coroutines.withContext
+import timber.log.Timber
 
 suspend inline fun <reified T> handleErrors(
     coroutineDispatchers: DefaultCoroutineDispatchers,
@@ -15,11 +16,11 @@ suspend inline fun <reified T> handleErrors(
 
     val result = try {
         response()
-    } catch(e: IOException) {
+    } catch (e: IOException) {
+        Timber.e("handleErrors:Exception:$e")
         throw NetworkException(NetworkError.ServiceUnavailable)
     }
-
-    when(result.status.value) {
+    when (result.status.value) {
         in 200..299 -> Unit
         in 400..499 -> throw NetworkException(NetworkError.ClientError)
         500 -> throw NetworkException(NetworkError.ServerError)
@@ -28,7 +29,8 @@ suspend inline fun <reified T> handleErrors(
 
     return@withContext try {
         result.body()
-    } catch(e: Exception) {
+    } catch (e: Exception) {
+        Timber.e("handleErrors:Exception:$e")
         throw NetworkException(NetworkError.ServerError)
     }
 

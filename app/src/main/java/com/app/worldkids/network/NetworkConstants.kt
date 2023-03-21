@@ -6,6 +6,8 @@ object NetworkConstants {
     object Wordkids {
         const val route = baseUrl + "api"
         const val register = "$route/admin/auth/login-device"
+        fun listCheckIn(classId: String) = "$route/admin/checkin/$classId/list-checkin"
+        fun listCheckOut(classId: String) = "$route/admin/checkin/$classId/list-checkout"
         val byName: (String) -> String = { name -> "$route/$name"}
     }
 }

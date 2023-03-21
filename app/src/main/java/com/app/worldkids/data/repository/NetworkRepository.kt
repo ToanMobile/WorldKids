@@ -6,6 +6,6 @@ interface NetworkRepository {
 
     suspend fun register() : Result<Boolean>
 
-    suspend fun getWordKidsList(): Result<List<ListMode>>
+    suspend fun getListCheckIn(): Result<List<ListMode>>
 
 }

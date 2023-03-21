@@ -16,6 +16,7 @@ import io.ktor.http.ContentType
 import io.ktor.http.contentType
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
+import timber.log.Timber
 
 class NetworkClient(
     private val httpClient: HttpClient,
@@ -31,15 +32,9 @@ class NetworkClient(
         }
     }
 
-    suspend fun getPokemonList(
-        page: Long,
-    ): RegisterResponse {
+    suspend fun getListCheckIn(classId: String): RegisterResponse {
         return handleErrors(coroutineDispatchers) {
-            httpClient.get(NetworkConstants.Wordkids.route) {
-                url {
-                    parameters.append("limit", PageSize.toString())
-                    parameters.append("offset", (page * PageSize).toString())
-                }
+            httpClient.get(NetworkConstants.Wordkids.listCheckIn(classId = classId)) {
                 contentType(ContentType.Application.Json)
             }
         }

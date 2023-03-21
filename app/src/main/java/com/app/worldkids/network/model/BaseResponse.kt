@@ -4,6 +4,7 @@ package com.app.worldkids.network.model
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+@Serializable
 data class BaseResponse<T>(
     @SerialName("meta")
     val meta: Meta = Meta(),

@@ -86,9 +86,9 @@ dependencies {
     implementation koinAndroid
 
     //Ktor
-    implementation ktorClientCore
     implementation ktorClientOkHttp
     implementation ktorSerializationJson
     implementation ktorContentNegotiation
     implementation ktorClientLogging
+    implementation ktorAuth
 }

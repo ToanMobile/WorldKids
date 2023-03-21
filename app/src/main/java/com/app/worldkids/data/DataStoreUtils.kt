@@ -12,13 +12,16 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.firstOrNull
+import kotlinx.coroutines.flow.map
 
 private val Context.dataStoreWordKids by preferencesDataStore(name = "SDKDataStore")
 
 class DataStoreUtils(private val context: Context) {
     private val dataStorePreferences: DataStore<Preferences> get() = context.dataStoreWordKids
 
-    suspend fun getToken() = dataStorePreferences.data.firstOrNull()
+    suspend fun getToken() = dataStorePreferences.data.map {
+        it[stringPreferencesKey("TOKEN")]
+    }.firstOrNull() ?:""
 
     suspend fun updateToken(token: String) {
         dataStorePreferences.edit {
