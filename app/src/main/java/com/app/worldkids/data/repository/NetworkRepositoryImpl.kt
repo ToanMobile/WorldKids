@@ -2,6 +2,7 @@ package com.app.worldkids.data.repository
 
 import com.app.worldkids.data.DataStoreUtils
 import com.app.worldkids.model.ListMode
+import com.app.worldkids.model.response.ListUser
 import com.app.worldkids.network.client.NetworkClient
 import org.koin.core.component.KoinComponent
 import timber.log.Timber
@@ -14,7 +15,7 @@ class NetworkRepositoryImpl(private val networkClient: NetworkClient, private va
             response.data?.auth?.token?.let {
                 dataStoreUtils.updateToken(token = it)
             }
-            Timber.e("register"+ response.data.toString())
+            Timber.e("register" + response.data.toString())
             Result.success(true)
         } catch (e: Exception) {
             e.printStackTrace()
@@ -22,15 +23,13 @@ class NetworkRepositoryImpl(private val networkClient: NetworkClient, private va
         }
     }
 
-    override suspend fun getListCheckIn(): Result<List<ListMode>> {
+    override suspend fun getListCheckIn(): Result<ListUser> {
         return try {
             val response = networkClient.getListCheckIn(classId = "72")
-            Timber.e("getListCheckIn::"+ response.data.toString())
-//            response.results.forEach { pokemon ->
-//               // pokemonDao.insert(pokemon.toPokemonEntity(page))
-//            }
-
-            Result.success(listOf())
+            Timber.e("getListCheckIn::" + response.data.toString())
+            response.data?.let {
+                Result.success(it)
+            } ?: Result.failure(Exception())
         } catch (e: Exception) {
             e.printStackTrace()
             Result.failure(e)

@@ -2,6 +2,7 @@ package com.app.worldkids.network.client
 
 import com.app.worldkids.model.ListMode
 import com.app.worldkids.model.request.RegisterRequest
+import com.app.worldkids.model.response.ListUser
 import com.app.worldkids.model.response.RegisterResponse
 import com.app.worldkids.network.NetworkConstants
 import com.app.worldkids.network.helper.handleErrors
@@ -32,7 +33,7 @@ class NetworkClient(
         }
     }
 
-    suspend fun getListCheckIn(classId: String): RegisterResponse {
+    suspend fun getListCheckIn(classId: String): BaseResponse<ListUser> {
         return handleErrors(coroutineDispatchers) {
             httpClient.get(NetworkConstants.Wordkids.listCheckIn(classId = classId)) {
                 contentType(ContentType.Application.Json)

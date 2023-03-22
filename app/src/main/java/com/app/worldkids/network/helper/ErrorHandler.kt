@@ -27,11 +27,12 @@ suspend inline fun <reified T> handleErrors(
         else -> throw NetworkException(NetworkError.UnknownError)
     }
 
-    return@withContext try {
+    return@withContext   result.body()
+    /*try {
         result.body()
     } catch (e: Exception) {
         Timber.e("handleErrors:Exception:$e")
         throw NetworkException(NetworkError.ServerError)
-    }
+    }*/
 
 }

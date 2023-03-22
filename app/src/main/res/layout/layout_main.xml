@@ -266,10 +266,11 @@
             android:id="@+id/rcvNoCheckIn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:layout_marginHorizontal="@dimen/dimens_40"
-            android:layout_marginTop="@dimen/dimens_24" />
+            android:layout_marginTop="@dimen/dimens_24"
+            android:minHeight="@dimen/dimens_275"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
         <TextView
             android:id="@+id/txtCheckIn"
@@ -285,9 +286,10 @@
             android:id="@+id/rcvCheckIn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             android:layout_marginHorizontal="@dimen/dimens_40"
-            android:layout_marginTop="@dimen/dimens_24" />
+            android:layout_marginTop="@dimen/dimens_24"
+            android:minHeight="@dimen/dimens_275"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager" />
     </androidx.appcompat.widget.LinearLayoutCompat>
 </androidx.core.widget.NestedScrollView>

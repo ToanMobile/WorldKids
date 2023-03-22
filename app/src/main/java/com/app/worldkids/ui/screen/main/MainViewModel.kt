@@ -4,32 +4,37 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.app.worldkids.data.DataStoreUtils
 import com.app.worldkids.data.repository.NetworkRepository
+import com.app.worldkids.model.response.ListUser
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
-class MainViewModel(networkRepository: NetworkRepository) : ViewModel() {
-    //http://139.180.155.164:3002/api/admin/checkin/6/list-checkin
-    private val list = ArrayList<Int>()
-    private val listLiveData = MutableLiveData<MutableList<Int>>()
+class MainViewModel(networkRepository: NetworkRepository, dataStoreUtils: DataStoreUtils) : ViewModel() {
+    private val listDataCheckIn = MutableLiveData<ListUser>()
     private val loadingStateLiveData = MutableLiveData<Boolean>()
     private val pageSize = 50
-
-    val loadingState: LiveData<Boolean> = loadingStateLiveData
-    val listState: LiveData<MutableList<Int>> = listLiveData
+    val listData: LiveData<ListUser> = listDataCheckIn
     val currentHours = MutableLiveData<String>()
     val currentTime = MutableLiveData<String>()
 
     init {
         viewModelScope.launch {
-            //networkRepository.register()
-            networkRepository.getListCheckIn()
+            val token = dataStoreUtils.getToken()
+            if (token.isBlank()) {
+                networkRepository.register()
+            }
+            networkRepository.getListCheckIn().onSuccess {
+                Timber.e("onSuccess::"+ it)
+                listDataCheckIn.postValue(it)
+            }.onFailure {
+                Timber.e(it)
+            }
         }
-        list.addAll(createPage())
-        listLiveData.postValue(list)
         viewModelScope.launch(Dispatchers.IO) {
             val localTime = LocalDateTime.now()
             currentHours.postValue(localTime.format(DateTimeFormatter.ofPattern("HH:mm")))
@@ -37,7 +42,7 @@ class MainViewModel(networkRepository: NetworkRepository) : ViewModel() {
         }
     }
 
-    fun loadMore(selectedPosition: Int, spanCount: Int) {
+ /*   fun loadMore(selectedPosition: Int, spanCount: Int) {
         if (loadingState.value == true) {
             return
         }
@@ -51,10 +56,10 @@ class MainViewModel(networkRepository: NetworkRepository) : ViewModel() {
             delay(2500L)
             listLiveData.postValue(ArrayList(list))
         }.invokeOnCompletion { loadingStateLiveData.postValue(false) }
-    }
+    }*/
 
-    private fun createPage(): List<Int> {
+   /* private fun createPage(): List<Int> {
         return List(pageSize) { index -> list.size + index }
-    }
+    }*/
 
 }

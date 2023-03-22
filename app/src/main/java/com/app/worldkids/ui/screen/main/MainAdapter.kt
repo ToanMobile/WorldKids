@@ -5,20 +5,23 @@ import coil.transform.CircleCropTransformation
 import com.app.worldkids.R
 import com.app.worldkids.databinding.AdapterItemGridBinding
 import com.app.worldkids.model.ListMode
+import com.app.worldkids.model.response.User
 import com.idanatz.oneadapter.external.modules.ItemModule
+import timber.log.Timber
 
-class MainModule : ItemModule<ListMode>() {
+class MainModule : ItemModule<User>() {
     init {
         config {
             layoutResource = R.layout.adapter_item_grid
         }
         onBind { model, viewBinder, _ ->
+            Timber.e("MainModule::$model")
             viewBinder.bindings(AdapterItemGridBinding::bind).run {
-                txtTitle.text = model.title
-                txtDes.text = model.des
-                imgAvatar.load(model.image) {
+                txtTitle.text = model.client?.fullname
+                txtDes.text = model.status
+                imgAvatar.load(model.client?.avatar) {
                     crossfade(true)
-                    placeholder(R.drawable.baseline_person_pin_24)
+                    placeholder(com.google.android.material.R.drawable.mtrl_ic_error)
                     transformations(CircleCropTransformation())
                 }
                 itemRoot.setOnFocusChangeListener { v, hasFocus ->

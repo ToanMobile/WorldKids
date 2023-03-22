@@ -29,6 +29,7 @@ internal fun createHttpClient(enableLogging: Boolean, interceptor: Interceptor, 
                 ignoreUnknownKeys = true
                 prettyPrint = true
                 isLenient = true
+                encodeDefaults = false
             })
         }
         install(Auth) {
