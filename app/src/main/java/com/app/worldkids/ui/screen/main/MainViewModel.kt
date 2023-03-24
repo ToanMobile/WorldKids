@@ -6,7 +6,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.app.worldkids.data.pre.DataStoreUtils
 import com.app.worldkids.data.repository.NetworkRepository
+import com.app.worldkids.model.CheckInStatus
 import com.app.worldkids.model.response.ListUser
+import com.app.worldkids.model.response.Register
+import com.app.worldkids.model.response.User
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -15,8 +18,6 @@ import java.time.format.DateTimeFormatter
 
 class MainViewModel(networkRepository: NetworkRepository, dataStoreUtils: DataStoreUtils) : ViewModel() {
     private val listDataCheckIn = MutableLiveData<ListUser>()
-    private val loadingStateLiveData = MutableLiveData<Boolean>()
-    private val pageSize = 50
     val listData: LiveData<ListUser> = listDataCheckIn
 
     private val _schoolName = MutableLiveData<String>()
@@ -24,6 +25,10 @@ class MainViewModel(networkRepository: NetworkRepository, dataStoreUtils: DataSt
 
     private val _managerName = MutableLiveData<String>()
     val managerName: LiveData<String> = _managerName
+
+    private val _countCheckIn = MutableLiveData<CheckInStatus>()
+    val countCheckIn: LiveData<CheckInStatus> = _countCheckIn
+
     val currentHours = MutableLiveData<String>()
     val currentTime = MutableLiveData<String>()
 
@@ -34,17 +39,10 @@ class MainViewModel(networkRepository: NetworkRepository, dataStoreUtils: DataSt
             if (classId == null || user.auth?.token == null) {
                 networkRepository.register()
             }
-            _schoolName.postValue("${user?.data?.classX?.name} - ${user?.data?.school?.name}")
-            val listManager = mutableListOf<String>()
-            user?.data?.classX?.user?.map {
-                it.fullname?.let { name ->
-                    listManager.add(name)
-                }
-            }
-            _managerName.postValue(listManager.joinToString(", "))
+            initNameClass(user = user)
             networkRepository.getListCheckIn(classId = classId ?: "").onSuccess {
                 Timber.e("onSuccess::$it")
-                listDataCheckIn.postValue(it)
+                initClass(it)
             }.onFailure {
                 Timber.e(it)
             }
@@ -54,6 +52,25 @@ class MainViewModel(networkRepository: NetworkRepository, dataStoreUtils: DataSt
             currentHours.postValue(localTime.format(DateTimeFormatter.ofPattern("HH:mm")))
             currentTime.postValue(localTime.format(DateTimeFormatter.ofPattern("EEEE, d MMMM yyyy")))
         }
+    }
+
+    private fun initNameClass(user: Register?) {
+        _schoolName.postValue("${user?.data?.classX?.name} - ${user?.data?.school?.name}")
+        val listManager = mutableListOf<String>()
+        user?.data?.classX?.user?.map {
+            it.fullname?.let { name ->
+                listManager.add(name)
+            }
+        }
+        _managerName.postValue(listManager.joinToString(", "))
+    }
+
+    private fun initClass(listUser: ListUser) {
+        listDataCheckIn.postValue(listUser)
+        val checkInStatus = CheckInStatus()
+        checkInStatus.PRESENT = listUser.listCheckin?.size ?: 0
+        checkInStatus.ABSENT = listUser.listNotCheckin?.size ?: 0
+        _countCheckIn.postValue(checkInStatus)
     }
 
     /*   fun loadMore(selectedPosition: Int, spanCount: Int) {

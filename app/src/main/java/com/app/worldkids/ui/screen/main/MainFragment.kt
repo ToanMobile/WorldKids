@@ -23,6 +23,9 @@ import com.app.worldkids.R
 import com.app.worldkids.databinding.LayoutMainBinding
 import com.app.worldkids.ui.viewBinding
 import com.idanatz.oneadapter.OneAdapter
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.activityViewModel
 
 
@@ -43,6 +46,13 @@ class MainFragment : Fragment(R.layout.layout_main) {
         }
         viewModel.managerName.observe(viewLifecycleOwner) {
             binding.txtManager.text = it
+        }
+        viewModel.countCheckIn.observe(viewLifecycleOwner) {
+            binding.txtPRESENT.text = it.PRESENT.toString()
+            binding.txtABSENT.text = it.ABSENT.toString()
+            binding.txtLATE.text = it.LATE.toString()
+            binding.txtOFFWITHLETTER.text = it.OFF_WITH_LETTER.toString()
+            binding.txtONLEAVE.text = it.ON_LEAVE.toString()
         }
     }
 
@@ -65,6 +75,14 @@ class MainFragment : Fragment(R.layout.layout_main) {
         viewModel.listData.observe(viewLifecycleOwner) {
             it.listNotCheckin?.let { it1 -> oneNoCheckInAdapter.setItems(it1) }
             it.listCheckin?.let { it1 -> oneCheckInAdapter.setItems(it1) }
+        }
+        MainScope().launch {
+            delay(500)
+            try {
+                binding.rcvNoCheckIn.getChildAt(0).requestFocus()
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
         }
     }
 }

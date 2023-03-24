@@ -10,6 +10,7 @@
     <string name="list_item_aspect_ratio">3:4</string>
 
     <dimen name="dimens_4">2.97dp</dimen>
+    <dimen name="dimens_6">4.5dp</dimen>
     <dimen name="dimens_8">5.94dp</dimen>
     <dimen name="dimens_16">11.89dp</dimen>
     <dimen name="dimens_24">17.83dp</dimen>

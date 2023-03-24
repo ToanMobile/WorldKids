@@ -8,6 +8,7 @@
 	<dimen name="adapter_item_height">460dp</dimen>
 	<dimen name="dimens_80">184dp</dimen>
 	<dimen name="dimens_4">9.2dp</dimen>
+	<dimen name="dimens_6">14dp</dimen>
 	<dimen name="selection_overlay_stroke_width">9.2dp</dimen>
 	<dimen name="list_margin_start">138dp</dimen>
 	<dimen name="dimens_206">473.8dp</dimen>

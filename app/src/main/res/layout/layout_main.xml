@@ -206,6 +206,7 @@
                 <TableRow android:weightSum="5">
 
                     <TextView
+                        android:id="@+id/txtPRESENT"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -215,6 +216,7 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/txtABSENT"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -224,6 +226,7 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/txtON_LEAVE"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -233,6 +236,7 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/txtLATE"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -242,6 +246,7 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/txtOFF_WITH_LETTER"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"

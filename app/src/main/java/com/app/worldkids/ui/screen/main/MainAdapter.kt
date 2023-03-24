@@ -1,12 +1,15 @@
 package com.app.worldkids.ui.screen.main
 
+import android.view.View
 import coil.load
 import coil.transform.CircleCropTransformation
 import com.app.worldkids.R
 import com.app.worldkids.databinding.AdapterItemGridBinding
 import com.app.worldkids.model.response.CheckIn
+import com.app.worldkids.utils.tint
 import com.idanatz.oneadapter.external.modules.ItemModule
 import timber.log.Timber
+
 
 class MainModule : ItemModule<CheckIn>() {
     init {
@@ -16,6 +19,7 @@ class MainModule : ItemModule<CheckIn>() {
         onBind { model, viewBinder, _ ->
             Timber.e("MainModule::$model")
             viewBinder.bindings(AdapterItemGridBinding::bind).run {
+                isStatus = model.status
                 txtTitle.text = model.client?.fullname
                 txtDes.text = model.status
                 imgAvatar.load(model.client?.avatar) {
@@ -25,7 +29,8 @@ class MainModule : ItemModule<CheckIn>() {
                 }
                 itemRoot.setOnFocusChangeListener { v, hasFocus ->
                     if (hasFocus) {
-                        v.setBackgroundResource(R.drawable.item_focus)
+                        v.setBackgroundResource(R.drawable.item_focus_absent)
+                        initStatusBackground(itemRoot = itemRoot, model.status)
                     } else {
                         v.setBackgroundResource(R.drawable.item_no_focus)
                     }
@@ -33,4 +38,13 @@ class MainModule : ItemModule<CheckIn>() {
             }
         }
     }
+
+    private fun initStatusBackground(itemRoot: View, status: String?){
+        when(status){
+            "ABSENT" -> itemRoot.background.tint(itemRoot.context, R.color.colorEA1911)
+            else -> itemRoot.background.tint(itemRoot.context, R.color.color3E9346)
+        }
+
+    }
+
 }
