@@ -1,9 +1,18 @@
 package com.app.worldkids.model
 
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class CheckInStatus(
-    var ABSENT: Int = 0,
-    var PRESENT: Int = 0,
-    var LATE: Int = 0,
-    var ON_LEAVE: Int = 0,
-    var OFF_WITH_LETTER: Int = 0,
+    @SerialName("totalCheckin")
+    val totalCheckin: Int = 0,
+    @SerialName("totalOff")
+    val totalOff: Int = 0,
+    @SerialName("totalConfirmOff")
+    val totalConfirmOff: Int = 0,
+    @SerialName("totalLate")
+    val totalLate: Int = 0,
+    @SerialName("totalAbsent")
+    val totalAbsent: Int = 0,
 )

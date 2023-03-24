@@ -18,6 +18,7 @@ package com.app.worldkids.ui.screen.main
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.app.worldkids.R
 import com.app.worldkids.databinding.LayoutMainBinding
@@ -48,11 +49,14 @@ class MainFragment : Fragment(R.layout.layout_main) {
             binding.txtManager.text = it
         }
         viewModel.countCheckIn.observe(viewLifecycleOwner) {
-            binding.txtPRESENT.text = it.PRESENT.toString()
-            binding.txtABSENT.text = it.ABSENT.toString()
-            binding.txtLATE.text = it.LATE.toString()
-            binding.txtOFFWITHLETTER.text = it.OFF_WITH_LETTER.toString()
-            binding.txtONLEAVE.text = it.ON_LEAVE.toString()
+            binding.txtPRESENT.text = it.totalCheckin.toString()
+            binding.txtABSENT.text = it.totalAbsent.toString()
+            binding.txtLATE.text = it.totalLate.toString()
+            binding.txtOFFWITHLETTER.text = it.totalOff.toString()
+            binding.txtONLEAVE.text = it.totalConfirmOff.toString()
+        }
+        viewModel.changeStatus.observe(viewLifecycleOwner) {
+            Toast.makeText(this.context, it ?: "", Toast.LENGTH_LONG).show()
         }
     }
 
@@ -77,7 +81,7 @@ class MainFragment : Fragment(R.layout.layout_main) {
             it.listCheckin?.let { it1 -> oneCheckInAdapter.setItems(it1) }
         }
         MainScope().launch {
-            delay(500)
+            delay(1000)
             try {
                 binding.rcvNoCheckIn.getChildAt(0).requestFocus()
             } catch (e: Exception) {

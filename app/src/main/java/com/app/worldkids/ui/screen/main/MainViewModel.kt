@@ -16,7 +16,7 @@ import timber.log.Timber
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
-class MainViewModel(networkRepository: NetworkRepository, dataStoreUtils: DataStoreUtils) : ViewModel() {
+class MainViewModel(private val networkRepository: NetworkRepository, dataStoreUtils: DataStoreUtils) : ViewModel() {
     private val listDataCheckIn = MutableLiveData<ListUser>()
     val listData: LiveData<ListUser> = listDataCheckIn
 
@@ -29,6 +29,9 @@ class MainViewModel(networkRepository: NetworkRepository, dataStoreUtils: DataSt
     private val _countCheckIn = MutableLiveData<CheckInStatus>()
     val countCheckIn: LiveData<CheckInStatus> = _countCheckIn
 
+    private val _changeStatus = MutableLiveData<String?>()
+    val changeStatus: LiveData<String?> = _changeStatus
+
     val currentHours = MutableLiveData<String>()
     val currentTime = MutableLiveData<String>()
 
@@ -40,12 +43,8 @@ class MainViewModel(networkRepository: NetworkRepository, dataStoreUtils: DataSt
                 networkRepository.register()
             }
             initNameClass(user = user)
-            networkRepository.getListCheckIn(classId = classId ?: "").onSuccess {
-                Timber.e("onSuccess::$it")
-                initClass(it)
-            }.onFailure {
-                Timber.e(it)
-            }
+            initDataClass(classId = classId ?: "")
+            initStatusClass(classId = classId ?: "")
         }
         viewModelScope.launch(Dispatchers.IO) {
             val localTime = LocalDateTime.now()
@@ -65,32 +64,33 @@ class MainViewModel(networkRepository: NetworkRepository, dataStoreUtils: DataSt
         _managerName.postValue(listManager.joinToString(", "))
     }
 
-    private fun initClass(listUser: ListUser) {
-        listDataCheckIn.postValue(listUser)
-        val checkInStatus = CheckInStatus()
-        checkInStatus.PRESENT = listUser.listCheckin?.size ?: 0
-        checkInStatus.ABSENT = listUser.listNotCheckin?.size ?: 0
-        _countCheckIn.postValue(checkInStatus)
+    private suspend fun initDataClass(classId: String?) {
+        networkRepository.getListCheckIn(classId = classId ?: "").onSuccess {
+            Timber.e("onSuccess::$it")
+            listDataCheckIn.postValue(it)
+        }.onFailure {
+            Timber.e(it)
+        }
     }
 
-    /*   fun loadMore(selectedPosition: Int, spanCount: Int) {
-           if (loadingState.value == true) {
-               return
-           }
-           val diffToEnd = list.size - selectedPosition
-           if (diffToEnd > spanCount) {
-               return
-           }
-           loadingStateLiveData.postValue(true)
-           viewModelScope.launch(Dispatchers.Default) {
-               list.addAll(createPage())
-               delay(2500L)
-               listLiveData.postValue(ArrayList(list))
-           }.invokeOnCompletion { loadingStateLiveData.postValue(false) }
-       }*/
+    private suspend fun initStatusClass(classId: String?) {
+        networkRepository.statusReport(classId = classId ?: "").onSuccess {
+            Timber.e("onSuccess::$it")
+            _countCheckIn.postValue(it)
+        }.onFailure {
+            Timber.e(it)
+        }
+    }
 
-    /* private fun createPage(): List<Int> {
-         return List(pageSize) { index -> list.size + index }
-     }*/
-
+    fun updateStatus(clientId: String?, status: String) {
+        viewModelScope.launch {
+            networkRepository.changeStatus(clientId = clientId ?: "", status = status).onSuccess {
+                Timber.e("onSuccess::$it")
+                _changeStatus.postValue(null)
+            }.onFailure {
+                _changeStatus.postValue(it.message)
+                Timber.e(it)
+            }
+        }
+    }
 }

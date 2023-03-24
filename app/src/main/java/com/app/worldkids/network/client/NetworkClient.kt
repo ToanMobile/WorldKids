@@ -1,5 +1,7 @@
 package com.app.worldkids.network.client
 
+import com.app.worldkids.model.CheckInStatus
+import com.app.worldkids.model.request.ChangeStatusRequest
 import com.app.worldkids.model.request.RegisterRequest
 import com.app.worldkids.model.response.ListUser
 import com.app.worldkids.model.response.Register
@@ -38,21 +40,21 @@ class NetworkClient(
             }
         }
     }
-/*
 
-    suspend fun getPokemonByName(
-        name: String,
-    ): ListMode {
+    suspend fun statusReport(classId: String): BaseResponse<CheckInStatus> {
         return handleErrors(coroutineDispatchers) {
-            httpClient.get(NetworkConstants.Wordkids.byName(name)) {
+            httpClient.get(NetworkConstants.Wordkids.statusReport(classId = classId, type = "CHECKIN")) {
                 contentType(ContentType.Application.Json)
             }
         }
     }
-*/
 
-    companion object {
-        private const val PageSize = 20
+    suspend fun changeStatus(clientId: String, status: String) : BaseResponse<Register> {
+        return handleErrors(coroutineDispatchers) {
+            httpClient.post(NetworkConstants.Wordkids.changeStatus) {
+                contentType(ContentType.Application.Json)
+                setBody(Json.encodeToString(ChangeStatusRequest(clientId = clientId, status = status)))
+            }
+        }
     }
-
 }

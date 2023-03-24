@@ -1,6 +1,7 @@
 package com.app.worldkids.data.repository
 
 import com.app.worldkids.data.pre.DataStoreUtils
+import com.app.worldkids.model.CheckInStatus
 import com.app.worldkids.model.response.ListUser
 import com.app.worldkids.network.client.NetworkClient
 import org.koin.core.component.KoinComponent
@@ -29,6 +30,29 @@ class NetworkRepositoryImpl(private val networkClient: NetworkClient, private va
             response.data?.let {
                 Result.success(it)
             } ?: Result.failure(Exception())
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Result.failure(e)
+        }
+    }
+
+    override suspend fun statusReport(classId: String): Result<CheckInStatus> {
+        return try {
+            val response = networkClient.statusReport(classId = classId)
+            Timber.e("getListCheckIn::" + response.data.toString())
+            response.data?.let {
+                Result.success(it)
+            } ?: Result.failure(Exception())
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Result.failure(e)
+        }
+    }
+
+    override suspend fun changeStatus(clientId: String, status: String): Result<Boolean> {
+        return try {
+            val response = networkClient.changeStatus(clientId, status)
+            Result.success(true)
         } catch (e: Exception) {
             e.printStackTrace()
             Result.failure(e)

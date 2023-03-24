@@ -12,6 +12,7 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.databinding.BindingAdapter
 import com.app.worldkids.R
+import com.app.worldkids.model.StatusType
 import com.google.android.material.imageview.ShapeableImageView
 import java.util.UUID
 
@@ -28,7 +29,11 @@ fun Drawable.tint(context: Context, @ColorRes color: Int) {
 @BindingAdapter("setStatus")
 fun ShapeableImageView.setStatus(isStatus: String) {
     this.strokeColor = when (isStatus) {
-        "ABSENT" -> ColorStateList.valueOf(context.getColor(R.color.colorEA1911))
+        StatusType.IN.name -> ColorStateList.valueOf(context.getColor(R.color.color3E9346))
+        StatusType.ABSENT.name -> ColorStateList.valueOf(context.getColor(R.color.colorEA1911))
+        StatusType.LATE.name -> ColorStateList.valueOf(context.getColor(R.color.color8939DA))
+        StatusType.OFF.name -> ColorStateList.valueOf(context.getColor(R.color.colorF7AD1A))
+        StatusType.CONFIRM_OFF.name -> ColorStateList.valueOf(context.getColor(R.color.colorF27F0C))
         else -> ColorStateList.valueOf(context.getColor(R.color.color3E9346))
     }
 }
@@ -36,7 +41,11 @@ fun ShapeableImageView.setStatus(isStatus: String) {
 @BindingAdapter("setStatus")
 fun TextView.setStatus(isStatus: String) {
     this.background = when (isStatus) {
-        "ABSENT" -> AppCompatResources.getDrawable(context, R.color.colorEA1911)
+        StatusType.IN.name -> AppCompatResources.getDrawable(context, R.color.color3E9346)
+        StatusType.ABSENT.name -> AppCompatResources.getDrawable(context, R.color.colorEA1911)
+        StatusType.LATE.name -> AppCompatResources.getDrawable(context, R.color.color8939DA)
+        StatusType.OFF.name -> AppCompatResources.getDrawable(context, R.color.colorF7AD1A)
+        StatusType.CONFIRM_OFF.name -> AppCompatResources.getDrawable(context, R.color.colorF27F0C)
         else -> AppCompatResources.getDrawable(context, R.color.color3E9346)
     }
 }
