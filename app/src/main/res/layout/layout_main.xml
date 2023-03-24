@@ -27,22 +27,23 @@
         <androidx.appcompat.widget.LinearLayoutCompat
             android:id="@+id/headerTitle"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dimens_150"
+            android:layout_height="match_parent"
             android:orientation="horizontal"
             android:padding="@dimen/dimens_24">
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1.5"
+                android:layout_weight="1"
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/txtClassName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Lớp Mickey 01 - WorldKids Bình Tân"
+                    android:text="Lớp Mickey 01 - WorldKids Bình Tân WorldKids"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/text36sp"
+                    android:textSize="@dimen/text30sp"
                     android:textStyle="bold" />
 
                 <androidx.appcompat.widget.LinearLayoutCompat
@@ -59,6 +60,7 @@
                         android:textSize="@dimen/text20sp" />
 
                     <TextView
+                        android:id="@+id/txtManager"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/dimens_4"
@@ -67,7 +69,7 @@
                         android:textSize="@dimen/text20sp"
                         android:textStyle="bold" />
 
-                    <TextView
+                    <!--<TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/dimens_8"
@@ -82,15 +84,14 @@
                         android:text="Nguyễn Như Ngọc"
                         android:textColor="@color/color3E9346"
                         android:textSize="@dimen/text20sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold" />-->
                 </androidx.appcompat.widget.LinearLayoutCompat>
             </androidx.appcompat.widget.LinearLayoutCompat>
 
             <androidx.appcompat.widget.LinearLayoutCompat
-                android:layout_width="0dp"
+                android:layout_width="@dimen/dimens_206"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="end|center_vertical"
+                android:gravity="center"
                 android:orientation="vertical">
 
                 <TextView
@@ -114,7 +115,7 @@
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.8"
+                android:layout_weight="0.5"
                 android:gravity="end"
                 android:orientation="vertical">
 
@@ -122,7 +123,7 @@
                     android:id="@+id/txtTime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/verify_in_class"
+                    android:text="10:26"
                     android:textColor="@color/color3968DA"
                     android:textSize="@dimen/text48sp"
                     android:textStyle="bold" />
@@ -132,7 +133,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dimens_4"
-                    android:text="@string/verify"
+                    android:text="Thứ Hai, 13 tháng 02 năm 2023"
                     android:textColor="@color/color3968DA"
                     android:textSize="@dimen/text24sp" />
             </androidx.appcompat.widget.LinearLayoutCompat>

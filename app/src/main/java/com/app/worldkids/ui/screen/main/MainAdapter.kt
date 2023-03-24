@@ -4,12 +4,11 @@ import coil.load
 import coil.transform.CircleCropTransformation
 import com.app.worldkids.R
 import com.app.worldkids.databinding.AdapterItemGridBinding
-import com.app.worldkids.model.ListMode
-import com.app.worldkids.model.response.User
+import com.app.worldkids.model.response.CheckIn
 import com.idanatz.oneadapter.external.modules.ItemModule
 import timber.log.Timber
 
-class MainModule : ItemModule<User>() {
+class MainModule : ItemModule<CheckIn>() {
     init {
         config {
             layoutResource = R.layout.adapter_item_grid

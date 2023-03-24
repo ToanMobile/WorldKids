@@ -1,9 +1,8 @@
 package com.app.worldkids.network.client
 
-import com.app.worldkids.model.ListMode
 import com.app.worldkids.model.request.RegisterRequest
 import com.app.worldkids.model.response.ListUser
-import com.app.worldkids.model.response.RegisterResponse
+import com.app.worldkids.model.response.Register
 import com.app.worldkids.network.NetworkConstants
 import com.app.worldkids.network.helper.handleErrors
 import com.app.worldkids.network.model.BaseResponse
@@ -24,7 +23,7 @@ class NetworkClient(
     private val coroutineDispatchers: DefaultCoroutineDispatchers
 ) {
 
-    suspend fun register() : BaseResponse<RegisterResponse> {
+    suspend fun register() : BaseResponse<Register> {
         return handleErrors(coroutineDispatchers) {
             httpClient.post(NetworkConstants.Wordkids.register) {
                 contentType(ContentType.Application.Json)
@@ -40,6 +39,7 @@ class NetworkClient(
             }
         }
     }
+/*
 
     suspend fun getPokemonByName(
         name: String,
@@ -50,6 +50,7 @@ class NetworkClient(
             }
         }
     }
+*/
 
     companion object {
         private const val PageSize = 20

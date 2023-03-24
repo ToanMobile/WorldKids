@@ -1,6 +1,6 @@
 package com.app.worldkids.data.di
 
-import com.app.worldkids.data.DataStoreUtils
+import com.app.worldkids.data.pre.DataStoreUtils
 import com.app.worldkids.data.repository.NetworkRepository
 import com.app.worldkids.data.repository.NetworkRepositoryImpl
 import com.app.worldkids.ui.screen.main.MainViewModel

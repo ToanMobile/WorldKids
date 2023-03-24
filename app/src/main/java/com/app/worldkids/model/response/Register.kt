@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class RegisterResponse(
+data class Register(
     @SerialName("auth")
     val auth: Auth? = null,
     @SerialName("data")
@@ -26,13 +26,13 @@ data class RegisterResponse(
     @Serializable
     data class DataX(
         @SerialName("class")
-        val classX: String? = null, // null
+        val classX: Class,
         @SerialName("deviceId")
-        val deviceId: String? = null, // bd26569d-be59-3b50-a725-02f31da5a797
+        val deviceId: String,
         @SerialName("platform")
-        val platform: String? = null, // android-tv
+        val platform: String,
         @SerialName("school")
-        val school: String? = null // null
+        val school: School
     ) {
         override fun toString(): String {
             return "DataX(classX=$classX, deviceId=$deviceId, platform=$platform, school=$school)"

@@ -20,4 +20,8 @@ data class Client(
     val id: Int? = null,
     @SerialName("personalId")
     val personalId: String? = null
-)
+) {
+    override fun toString(): String {
+        return "Client(avatar=$avatar, birthday=$birthday, code=$code, fullname=$fullname, gender=$gender, id=$id, personalId=$personalId)"
+    }
+}

@@ -1,7 +1,6 @@
 package com.app.worldkids.data.repository
 
-import com.app.worldkids.data.DataStoreUtils
-import com.app.worldkids.model.ListMode
+import com.app.worldkids.data.pre.DataStoreUtils
 import com.app.worldkids.model.response.ListUser
 import com.app.worldkids.network.client.NetworkClient
 import org.koin.core.component.KoinComponent
@@ -12,10 +11,10 @@ class NetworkRepositoryImpl(private val networkClient: NetworkClient, private va
     override suspend fun register(): Result<Boolean> {
         return try {
             val response = networkClient.register()
-            response.data?.auth?.token?.let {
-                dataStoreUtils.updateToken(token = it)
+            response.data?.let {
+                dataStoreUtils.updateUserPreferences(userPreferences = it)
+                Timber.e("register::::${it}")
             }
-            Timber.e("register" + response.data.toString())
             Result.success(true)
         } catch (e: Exception) {
             e.printStackTrace()
@@ -23,9 +22,9 @@ class NetworkRepositoryImpl(private val networkClient: NetworkClient, private va
         }
     }
 
-    override suspend fun getListCheckIn(): Result<ListUser> {
+    override suspend fun getListCheckIn(classId: String): Result<ListUser> {
         return try {
-            val response = networkClient.getListCheckIn(classId = "72")
+            val response = networkClient.getListCheckIn(classId = classId)
             Timber.e("getListCheckIn::" + response.data.toString())
             response.data?.let {
                 Result.success(it)

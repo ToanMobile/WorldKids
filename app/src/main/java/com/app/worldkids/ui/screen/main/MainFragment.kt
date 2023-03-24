@@ -21,7 +21,6 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import com.app.worldkids.R
 import com.app.worldkids.databinding.LayoutMainBinding
-import com.app.worldkids.model.ListMode
 import com.app.worldkids.ui.viewBinding
 import com.idanatz.oneadapter.OneAdapter
 import org.koin.androidx.viewmodel.ext.android.activityViewModel
@@ -33,8 +32,18 @@ class MainFragment : Fragment(R.layout.layout_main) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupData()
         setupTime()
         setupRecyclerView()
+    }
+
+    private fun setupData() {
+        viewModel.schoolName.observe(viewLifecycleOwner) {
+            binding.txtClassName.text = it
+        }
+        viewModel.managerName.observe(viewLifecycleOwner) {
+            binding.txtManager.text = it
+        }
     }
 
     private fun setupTime() {

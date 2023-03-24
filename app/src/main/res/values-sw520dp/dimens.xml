@@ -30,6 +30,7 @@
     <dimen name="text20sp">14.86sp</dimen>
     <dimen name="text24sp">17.83sp</dimen>
     <dimen name="text26sp">19.31sp</dimen>
+    <dimen name="text30sp">24sp</dimen>
     <dimen name="text36sp">26.74sp</dimen>
     <dimen name="text48sp">35.66sp</dimen>
 </resources>

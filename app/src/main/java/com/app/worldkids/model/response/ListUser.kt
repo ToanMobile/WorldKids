@@ -6,7 +6,11 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class ListUser(
     @SerialName("listCheckin")
-    val listCheckin: List<User>? = null,
+    val listCheckin: List<CheckIn>? = null,
     @SerialName("listNotCheckin")
-    val listNotCheckin: List<User>? = null
-)
+    val listNotCheckin: List<CheckIn>? = null
+) {
+    override fun toString(): String {
+        return "ListUser(listCheckin=$listCheckin, listNotCheckin=$listNotCheckin)"
+    }
+}

@@ -1,6 +1,6 @@
 package com.app.worldkids.network
 
-import com.app.worldkids.data.DataStoreUtils
+import com.app.worldkids.data.pre.DataStoreUtils
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.okhttp.OkHttp
 import io.ktor.client.plugins.auth.Auth
@@ -36,7 +36,7 @@ internal fun createHttpClient(enableLogging: Boolean, interceptor: Interceptor, 
             lateinit var token: String
             bearer {
                 loadTokens {
-                    token = dataStoreUtils.getToken()
+                    token = dataStoreUtils.getUserPreferences()?.auth?.token ?: ""
                     Timber.e("loadTokens::$token")
                     BearerTokens(accessToken = token, refreshToken = token)
                 }

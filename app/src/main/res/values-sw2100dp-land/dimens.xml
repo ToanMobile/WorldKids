@@ -20,6 +20,7 @@
 	<dimen name="dimens_27">62.1dp</dimen>
 	<dimen name="dimens_8">18.4dp</dimen>
 	<dimen name="dimens_275">632.5dp</dimen>
+	<dimen name="text30sp">72sp</dimen>
 	<dimen name="text36sp">82.8sp</dimen>
 	<dimen name="text48sp">110.4sp</dimen>
 	<dimen name="text14sp">32.2sp</dimen>
