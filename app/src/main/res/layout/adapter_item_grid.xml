@@ -54,7 +54,6 @@
                     android:fontFamily="sans-serif-medium"
                     android:lines="1"
                     android:padding="@dimen/dimens_8"
-                    android:text="@string/noCheckIn"
                     android:textColor="@color/white"
                     android:textSize="@dimen/text12sp"
                     android:textStyle="bold" />

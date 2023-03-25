@@ -53,18 +53,41 @@ fun ShapeableImageView.setStatus(isStatus: String) {
 @BindingAdapter("setStatus")
 fun TextView.setStatus(isStatus: String) {
     this.background = when (isStatus) {
-        StatusType.IN.name -> AppCompatResources.getDrawable(context, R.color.color3E9346)
-        StatusType.ABSENT.name -> AppCompatResources.getDrawable(context, R.color.colorEA1911)
-        StatusType.LATE.name -> AppCompatResources.getDrawable(context, R.color.color8939DA)
-        StatusType.OFF.name -> AppCompatResources.getDrawable(context, R.color.colorF7AD1A)
-        StatusType.CONFIRM_OFF.name -> AppCompatResources.getDrawable(context, R.color.colorF27F0C)
-        else -> AppCompatResources.getDrawable(context, R.color.color3E9346)
+        StatusType.IN.name -> {
+            text = this.context.getString(R.string.checkIn)
+            AppCompatResources.getDrawable(context, R.color.color3E9346)
+        }
+
+        StatusType.ABSENT.name -> {
+            text = this.context.getString(R.string.noCheckIn)
+            AppCompatResources.getDrawable(context, R.color.colorEA1911)
+        }
+
+        StatusType.LATE.name -> {
+            text = this.context.getString(R.string.confirm_delay)
+            AppCompatResources.getDrawable(context, R.color.color8939DA)
+        }
+
+        StatusType.OFF.name -> {
+            text = this.context.getString(R.string.off)
+            AppCompatResources.getDrawable(context, R.color.colorF7AD1A)
+        }
+
+        StatusType.CONFIRM_OFF.name -> {
+            text = this.context.getString(R.string.confirm_off)
+            AppCompatResources.getDrawable(context, R.color.colorF27F0C)
+        }
+
+        else -> {
+            text = this.context.getString(R.string.present)
+            AppCompatResources.getDrawable(context, R.color.color3E9346)
+        }
     }
 }
 
 val getAndroidID get() = getDeviceId(ContextApp.applicationContext.contentResolver)
 
-fun withDialogItems(view: View, context: Context, callback:(Int) -> Unit) {
+fun withDialogItems(view: View, context: Context, callback: (Int) -> Unit) {
     val popupMenu = CascadePopupMenu(context, view, styler = cascadeMenuStyler(context = context))
     popupMenu.menu.apply {
         MenuCompat.setGroupDividerEnabled(this, true)

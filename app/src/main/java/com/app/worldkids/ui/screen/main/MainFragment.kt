@@ -57,7 +57,7 @@ class MainFragment : Fragment(R.layout.layout_main) {
             binding.txtONLEAVE.text = it.totalConfirmOff.toString()
         }
         viewModel.changeStatus.observe(viewLifecycleOwner) {
-            Toast.makeText(this.context, it ?: "", Toast.LENGTH_LONG).show()
+            //Toast.makeText(this.context, it ?: "", Toast.LENGTH_LONG).show()
         }
     }
 
