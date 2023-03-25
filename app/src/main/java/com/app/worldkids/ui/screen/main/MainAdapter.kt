@@ -8,14 +8,22 @@ import com.app.worldkids.databinding.AdapterItemGridBinding
 import com.app.worldkids.model.StatusType
 import com.app.worldkids.model.response.CheckIn
 import com.app.worldkids.utils.tint
+import com.idanatz.oneadapter.external.event_hooks.ClickEventHook
 import com.idanatz.oneadapter.external.modules.ItemModule
 import timber.log.Timber
 
 
-class MainModule : ItemModule<CheckIn>() {
+class MainModule(clickItem: (CheckIn, View) -> Unit) : ItemModule<CheckIn>() {
     init {
         config {
             layoutResource = R.layout.adapter_item_grid
+        }
+        eventHooks += ClickEventHook<CheckIn>().apply {
+            onClick { model, viewBinder, _ ->
+                viewBinder.bindings(AdapterItemGridBinding::bind).run {
+                    clickItem(model, imgAvatar)
+                }
+            }
         }
         onBind { model, viewBinder, _ ->
             Timber.e("MainModule::$model")
@@ -40,8 +48,8 @@ class MainModule : ItemModule<CheckIn>() {
         }
     }
 
-    private fun initStatusBackground(itemRoot: View, status: String?){
-        when(status){
+    private fun initStatusBackground(itemRoot: View, status: String?) {
+        when (status) {
             StatusType.IN.name -> itemRoot.background.tint(itemRoot.context, R.color.color3E9346)
             StatusType.ABSENT.name -> itemRoot.background.tint(itemRoot.context, R.color.colorEA1911)
             StatusType.LATE.name -> itemRoot.background.tint(itemRoot.context, R.color.color8939DA)

@@ -23,6 +23,7 @@ import androidx.fragment.app.Fragment
 import com.app.worldkids.R
 import com.app.worldkids.databinding.LayoutMainBinding
 import com.app.worldkids.ui.viewBinding
+import com.app.worldkids.utils.withDialogItems
 import com.idanatz.oneadapter.OneAdapter
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.delay
@@ -71,10 +72,14 @@ class MainFragment : Fragment(R.layout.layout_main) {
 
     private fun setupRecyclerView() {
         val oneNoCheckInAdapter = OneAdapter(binding.rcvNoCheckIn) {
-            itemModules += MainModule()
+            itemModules += MainModule { item, view ->
+                withDialogItems(view = view, context = this@MainFragment.requireContext())
+            }
         }
         val oneCheckInAdapter = OneAdapter(binding.rcvCheckIn) {
-            itemModules += MainModule()
+            itemModules += MainModule { item, view ->
+                withDialogItems(view = view, context = this@MainFragment.requireContext())
+            }
         }
         viewModel.listData.observe(viewLifecycleOwner) {
             it.listNotCheckin?.let { it1 -> oneNoCheckInAdapter.setItems(it1) }

@@ -6,14 +6,19 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import android.provider.Settings
+import android.view.Gravity
+import android.view.View
 import android.widget.TextView
 import androidx.annotation.ColorRes
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.appcompat.widget.PopupMenu
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.databinding.BindingAdapter
 import com.app.worldkids.R
 import com.app.worldkids.model.StatusType
 import com.google.android.material.imageview.ShapeableImageView
+import timber.log.Timber
 import java.util.UUID
 
 @SuppressLint("HardwareIds")
@@ -51,3 +56,10 @@ fun TextView.setStatus(isStatus: String) {
 }
 
 val getAndroidID get() = getDeviceId(ContextApp.applicationContext.contentResolver)
+
+fun withDialogItems(view: View, context: Context) {
+    val items = arrayOf("Đã có mặt", "Xác nhận vắng")
+    val popupMenu = PopupMenu(context, view)
+    popupMenu.menuInflater.inflate(R.menu.popup_menu,popupMenu.menu)
+    popupMenu.show()
+}
