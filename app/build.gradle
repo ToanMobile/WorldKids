@@ -73,6 +73,7 @@ dependencies {
     implementation poolingcontainer
     implementation fastAdapter
     implementation composeUI
+    implementation popupMenu
 
     implementation navigationFragment
     implementation navigationUi

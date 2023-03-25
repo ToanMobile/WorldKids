@@ -4,21 +4,28 @@ import android.annotation.SuppressLint
 import android.content.ContentResolver
 import android.content.Context
 import android.content.res.ColorStateList
+import android.graphics.Color
+import android.graphics.Color.BLACK
+import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
+import android.graphics.drawable.RippleDrawable
 import android.provider.Settings
+import android.util.TypedValue
 import android.view.Gravity
 import android.view.View
 import android.widget.TextView
 import androidx.annotation.ColorRes
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.content.res.AppCompatResources
-import androidx.appcompat.widget.PopupMenu
+import androidx.compose.ui.unit.dp
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.drawable.DrawableCompat
+import androidx.core.view.MenuCompat
 import androidx.databinding.BindingAdapter
 import com.app.worldkids.R
 import com.app.worldkids.model.StatusType
 import com.google.android.material.imageview.ShapeableImageView
-import timber.log.Timber
+import me.saket.cascade.CascadePopupMenu
+import me.saket.cascade.allChildren
 import java.util.UUID
 
 @SuppressLint("HardwareIds")
@@ -58,8 +65,34 @@ fun TextView.setStatus(isStatus: String) {
 val getAndroidID get() = getDeviceId(ContextApp.applicationContext.contentResolver)
 
 fun withDialogItems(view: View, context: Context) {
-    val items = arrayOf("Đã có mặt", "Xác nhận vắng")
-    val popupMenu = PopupMenu(context, view)
-    popupMenu.menuInflater.inflate(R.menu.popup_menu,popupMenu.menu)
+    val popupMenu = CascadePopupMenu(context, view, styler = cascadeMenuStyler(context = context))
+    popupMenu.menu.apply {
+        MenuCompat.setGroupDividerEnabled(this, true)
+        add("About")
+        add("Copy")
+        allChildren.filter { it.intent == null }.forEach {
+            it.setOnMenuItemClickListener {
+                popupMenu.navigateBack()
+            }
+        }
+    }
     popupMenu.show()
+}
+
+private fun cascadeMenuStyler(context: Context): CascadePopupMenu.Styler {
+    val rippleDrawable = {
+        RippleDrawable(ColorStateList.valueOf(Color.parseColor("#FF3E9346")), null, ColorDrawable(BLACK))
+    }
+
+    return CascadePopupMenu.Styler(
+        background = { RoundedRectDrawable(Color.parseColor("#FFFFFFFF"), radius = 8f) },
+        menuTitle = {
+            it.setBackground(rippleDrawable())
+        },
+        menuItem = {
+            it.titleView.setTextColor(context.getColor(R.color.color3E9346))
+            it.setBackground(rippleDrawable())
+            it.setGroupDividerColor(Color.parseColor("#FF3E9346"))
+        }
+    )
 }
