@@ -49,12 +49,10 @@ class NetworkClient(
         }
     }
 
-    suspend fun changeStatus(clientId: String, status: String) : BaseResponse<Register> {
-        return handleErrors(coroutineDispatchers) {
-            httpClient.post(NetworkConstants.Wordkids.changeStatus) {
-                contentType(ContentType.Application.Json)
-                setBody(Json.encodeToString(ChangeStatusRequest(clientId = clientId, status = status)))
-            }
+    suspend fun changeStatus(clientId: String, status: String) {
+        httpClient.post(NetworkConstants.Wordkids.changeStatus) {
+            contentType(ContentType.Application.Json)
+            setBody(Json.encodeToString(ChangeStatusRequest(clientId = clientId, status = status)))
         }
     }
 }

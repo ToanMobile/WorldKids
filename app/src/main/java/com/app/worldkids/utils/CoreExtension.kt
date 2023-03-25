@@ -64,14 +64,15 @@ fun TextView.setStatus(isStatus: String) {
 
 val getAndroidID get() = getDeviceId(ContextApp.applicationContext.contentResolver)
 
-fun withDialogItems(view: View, context: Context) {
+fun withDialogItems(view: View, context: Context, callback:(Int) -> Unit) {
     val popupMenu = CascadePopupMenu(context, view, styler = cascadeMenuStyler(context = context))
     popupMenu.menu.apply {
         MenuCompat.setGroupDividerEnabled(this, true)
-        add("About")
-        add("Copy")
-        allChildren.filter { it.intent == null }.forEach {
-            it.setOnMenuItemClickListener {
+        add(context.getString(R.string.present))
+        add(context.getString(R.string.confirm_off))
+        allChildren.filter { it.intent == null }.forEach { item ->
+            item.setOnMenuItemClickListener {
+                callback(it.itemId)
                 popupMenu.navigateBack()
             }
         }
@@ -90,7 +91,11 @@ private fun cascadeMenuStyler(context: Context): CascadePopupMenu.Styler {
             it.setBackground(rippleDrawable())
         },
         menuItem = {
-            it.titleView.setTextColor(context.getColor(R.color.color3E9346))
+            if (it.layoutPosition == 1) {
+                it.titleView.setTextColor(context.getColor(R.color.colorF27F0C))
+            } else {
+                it.titleView.setTextColor(context.getColor(R.color.color3E9346))
+            }
             it.setBackground(rippleDrawable())
             it.setGroupDividerColor(Color.parseColor("#FF3E9346"))
         }

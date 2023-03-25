@@ -34,12 +34,13 @@ class MainViewModel(private val networkRepository: NetworkRepository, dataStoreU
 
     val currentHours = MutableLiveData<String>()
     val currentTime = MutableLiveData<String>()
+    private var user: Register? = null
 
     init {
         viewModelScope.launch {
-            val user = dataStoreUtils.getUserPreferences()
+            user = dataStoreUtils.getUserPreferences()
             val classId = user?.data?.classX?.id
-            if (classId == null || user.auth?.token == null) {
+            if (classId == null || user?.auth?.token == null) {
                 networkRepository.register()
             }
             initNameClass(user = user)
@@ -82,10 +83,16 @@ class MainViewModel(private val networkRepository: NetworkRepository, dataStoreU
         }
     }
 
-    fun updateStatus(clientId: String?, status: String) {
+    fun updateStatus(clientId: Int?, status: String) {
+        if (clientId == null) return
         viewModelScope.launch {
-            networkRepository.changeStatus(clientId = clientId ?: "", status = status).onSuccess {
+            networkRepository.changeStatus(clientId = clientId.toString(), status = status).onSuccess {
                 Timber.e("onSuccess::$it")
+                val classId = user?.data?.classX?.id
+                if (classId == null || user?.auth?.token == null) {
+                    networkRepository.register()
+                }
+                initDataClass(classId = classId ?: "")
                 _changeStatus.postValue(null)
             }.onFailure {
                 _changeStatus.postValue(it.message)
