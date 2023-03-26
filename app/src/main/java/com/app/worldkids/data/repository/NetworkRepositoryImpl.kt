@@ -26,7 +26,6 @@ class NetworkRepositoryImpl(private val networkClient: NetworkClient, private va
     override suspend fun getListCheckIn(classId: String): Result<ListUser> {
         return try {
             val response = networkClient.getListCheckIn(classId = classId)
-            Timber.e("getListCheckIn::" + response.data.toString())
             response.data?.let {
                 Result.success(it)
             } ?: Result.failure(Exception())
@@ -39,7 +38,7 @@ class NetworkRepositoryImpl(private val networkClient: NetworkClient, private va
     override suspend fun statusReport(classId: String): Result<CheckInStatus> {
         return try {
             val response = networkClient.statusReport(classId = classId)
-            Timber.e("getListCheckIn::" + response.data.toString())
+            Timber.e("statusReport::" + response.data.toString())
             response.data?.let {
                 Result.success(it)
             } ?: Result.failure(Exception())

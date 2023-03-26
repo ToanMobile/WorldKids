@@ -22,6 +22,6 @@ data class Client(
     val personalId: String? = null
 ) {
     override fun toString(): String {
-        return "Client(avatar=$avatar, birthday=$birthday, code=$code, fullname=$fullname, gender=$gender, id=$id, personalId=$personalId)"
+        return "Client(code=$code, fullname=$fullname)"
     }
 }

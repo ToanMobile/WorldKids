@@ -20,9 +20,9 @@ data class CheckIn(
     @SerialName("timerId")
     val timerId: String? = null
 ) : Diffable {
-    override val uniqueIdentifier: Long = 0
-    override fun areContentTheSame(other: Any): Boolean = className == (other as CheckIn).className
+    override val uniqueIdentifier: Long = client?.id?.toLong() ?: 0L
+    override fun areContentTheSame(other: Any): Boolean = status == (other as CheckIn).status
     override fun toString(): String {
-        return "CheckIn(className=$className, client=$client, endTime=$endTime, startTime=$startTime, status=$status, timerId=$timerId, uniqueIdentifier=$uniqueIdentifier)"
+        return "CheckIn(client=$client, status=$status)"
     }
 }

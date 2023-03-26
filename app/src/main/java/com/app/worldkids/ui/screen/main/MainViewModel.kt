@@ -67,7 +67,7 @@ class MainViewModel(private val networkRepository: NetworkRepository, dataStoreU
 
     private suspend fun initDataClass(classId: String?) {
         networkRepository.getListCheckIn(classId = classId ?: "").onSuccess {
-            Timber.e("onSuccess::$it")
+            Timber.e("initDataClass::$it")
             listDataCheckIn.postValue(it)
         }.onFailure {
             Timber.e(it)
@@ -87,7 +87,6 @@ class MainViewModel(private val networkRepository: NetworkRepository, dataStoreU
         if (clientId == null) return
         viewModelScope.launch {
             networkRepository.changeStatus(clientId = clientId.toString(), status = status).onSuccess {
-                Timber.e("onSuccess::$it")
                 val classId = user?.data?.classX?.id
                 if (classId == null || user?.auth?.token == null) {
                     networkRepository.register()
