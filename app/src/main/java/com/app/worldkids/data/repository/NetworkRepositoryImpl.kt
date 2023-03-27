@@ -3,20 +3,21 @@ package com.app.worldkids.data.repository
 import com.app.worldkids.data.pre.DataStoreUtils
 import com.app.worldkids.model.CheckInStatus
 import com.app.worldkids.model.response.ListUser
+import com.app.worldkids.model.response.Register
 import com.app.worldkids.network.client.NetworkClient
 import org.koin.core.component.KoinComponent
 import timber.log.Timber
 
 class NetworkRepositoryImpl(private val networkClient: NetworkClient, private val dataStoreUtils: DataStoreUtils) : NetworkRepository, KoinComponent {
 
-    override suspend fun register(): Result<Boolean> {
+    override suspend fun register(): Result<Register?> {
         return try {
             val response = networkClient.register()
             response.data?.let {
                 dataStoreUtils.updateUserPreferences(userPreferences = it)
                 Timber.e("register::::${it}")
-            }
-            Result.success(true)
+                Result.success(it)
+            } ?: Result.success(null)
         } catch (e: Exception) {
             e.printStackTrace()
             Result.failure(e)

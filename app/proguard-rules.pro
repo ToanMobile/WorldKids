@@ -228,6 +228,9 @@
     *** INSTANCE;
     kotlinx.serialization.KSerializer serializer(...);
 }
+-keepclassmembers @kotlinx.serialization.Serializable class ** {
+    *** Companion;
+}
 # lookup for plugin generated serializable classes
 -if @kotlinx.serialization.Serializable class com.app.worldkids.model.**
 -keepclassmembers class com.app.worldkids.model.<1>$Companion {
@@ -309,7 +312,7 @@
 #Ktor
 -keep class io.ktor.server.netty.EngineMain { *; }
 -keep class io.ktor.server.config.HoconConfigLoader { *; }
--keep class com.example.ApplicationKt { *; }
+-keep class com.app.worldkids.AppKt { *; }
 -keep class kotlin.reflect.jvm.internal.** { *; }
 -keep class kotlin.text.RegexOption { *; }
 

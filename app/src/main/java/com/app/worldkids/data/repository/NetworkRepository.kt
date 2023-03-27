@@ -2,10 +2,11 @@ package com.app.worldkids.data.repository
 
 import com.app.worldkids.model.CheckInStatus
 import com.app.worldkids.model.response.ListUser
+import com.app.worldkids.model.response.Register
 
 interface NetworkRepository {
 
-    suspend fun register() : Result<Boolean>
+    suspend fun register() : Result<Register?>
 
     suspend fun getListCheckIn(classId : String): Result<ListUser>
 

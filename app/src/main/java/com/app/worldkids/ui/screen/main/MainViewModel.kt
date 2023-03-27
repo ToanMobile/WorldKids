@@ -35,14 +35,12 @@ class MainViewModel(private val networkRepository: NetworkRepository, dataStoreU
     val currentHours = MutableLiveData<String>()
     val currentTime = MutableLiveData<String>()
     private var user: Register? = null
+    private var classId: String? = null
 
     init {
         viewModelScope.launch {
-            user = dataStoreUtils.getUserPreferences()
-            val classId = user?.data?.classX?.id
-            if (classId == null || user?.auth?.token == null) {
-                networkRepository.register()
-            }
+            syncToken(dataStoreUtils = dataStoreUtils)
+            Timber.e("getUserPreferences::$user")
             initNameClass(user = user)
             initDataClass(classId = classId ?: "")
             initStatusClass(classId = classId ?: "")
@@ -54,7 +52,7 @@ class MainViewModel(private val networkRepository: NetworkRepository, dataStoreU
         }
     }
 
-    private fun initNameClass(user: Register?) {
+    private suspend fun initNameClass(user: Register?) {
         _schoolName.postValue("${user?.data?.classX?.name} - ${user?.data?.school?.name}")
         val listManager = mutableListOf<String>()
         user?.data?.classX?.user?.map {
@@ -87,10 +85,6 @@ class MainViewModel(private val networkRepository: NetworkRepository, dataStoreU
         if (clientId == null) return
         viewModelScope.launch {
             networkRepository.changeStatus(clientId = clientId.toString(), status = status).onSuccess {
-                val classId = user?.data?.classX?.id
-                if (classId == null || user?.auth?.token == null) {
-                    networkRepository.register()
-                }
                 initDataClass(classId = classId ?: "")
                 _changeStatus.postValue(null)
             }.onFailure {
@@ -98,5 +92,15 @@ class MainViewModel(private val networkRepository: NetworkRepository, dataStoreU
                 Timber.e(it)
             }
         }
+    }
+
+    private suspend fun syncToken(dataStoreUtils: DataStoreUtils) {
+        user = dataStoreUtils.getUserPreferences()
+        classId = user?.data?.classX?.id
+        if (classId == null || user?.auth?.token == null) {
+            user = networkRepository.register().getOrNull()
+            classId = user?.data?.classX?.id
+        }
+        Timber.e("getUserPreferences::$user")
     }
 }
