@@ -15,7 +15,7 @@ class NetworkRepositoryImpl(private val networkClient: NetworkClient, private va
             val response = networkClient.register()
             response.data?.let {
                 dataStoreUtils.updateUserPreferences(userPreferences = it)
-                Timber.e("register::::${it}")
+                networkClient.updateAuth(token = it.auth?.token ?: "")
                 Result.success(it)
             } ?: Result.success(null)
         } catch (e: Exception) {
