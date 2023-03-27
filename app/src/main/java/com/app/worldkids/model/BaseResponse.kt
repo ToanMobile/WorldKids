@@ -1,4 +1,4 @@
-package com.app.worldkids.network.model
+package com.app.worldkids.model
 
 
 import kotlinx.serialization.SerialName

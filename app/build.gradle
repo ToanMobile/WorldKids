@@ -21,9 +21,9 @@ android {
     signingConfigs {
         release {
             storeFile file('keystore')
-            keyAlias 'alias' //key123
-            keyPassword 'password' //keystore123
-            storePassword 'password' //keystore123
+            keyAlias 'key123' //key123
+            keyPassword 'keystore123' //keystore123
+            storePassword 'keystore123' //keystore123
             enableV3Signing true
         }
     }
