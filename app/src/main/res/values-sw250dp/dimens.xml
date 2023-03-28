@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <dimen name="list_margin_start">16.67dp</dimen>
+    <dimen name="grid_item_spacing">6.67dp</dimen>
+    <dimen name="adapter_item_height">55.56dp</dimen>
+    <dimen name="selection_overlay_stroke_width">1.11dp</dimen>
+    <dimen name="corner_size">2.22dp</dimen>
+    <dimen name="list_item_width">37.5dp</dimen>
+    <dimen name="list_item_height">50dp</dimen>
+    <string name="list_item_aspect_ratio">3:4</string>
+
+    <dimen name="dimens_4">1.11dp</dimen>
+    <dimen name="dimens_6">1.67dp</dimen>
+    <dimen name="dimens_8">2.22dp</dimen>
+    <dimen name="dimens_16">4.44dp</dimen>
+    <dimen name="dimens_24">6.67dp</dimen>
+    <dimen name="dimens_27">7.5dp</dimen>
+    <dimen name="dimens_40">11.11dp</dimen>
+    <dimen name="dimens_80">22.22dp</dimen>
+    <dimen name="dimens_100">27.78dp</dimen>
+    <dimen name="dimens_120">33.33dp</dimen>
+    <dimen name="dimens_130">36.11dp</dimen>
+    <dimen name="dimens_150">41.67dp</dimen>
+    <dimen name="dimens_160">44.44dp</dimen>
+    <dimen name="dimens_206">57.22dp</dimen>
+    <dimen name="dimens_275">76.39dp</dimen>
+
+    <dimen name="text10sp">2.78sp</dimen>
+    <dimen name="text12sp">3.33sp</dimen>
+    <dimen name="text14sp">3.89sp</dimen>
+    <dimen name="text20sp">5.56sp</dimen>
+    <dimen name="text24sp">6.67sp</dimen>
+    <dimen name="text26sp">7.22sp</dimen>
+    <dimen name="text30sp">8.33sp</dimen>
+    <dimen name="text36sp">10sp</dimen>
+    <dimen name="text48sp">13.33sp</dimen>
+</resources>

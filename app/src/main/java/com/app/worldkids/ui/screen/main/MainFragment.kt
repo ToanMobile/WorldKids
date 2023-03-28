@@ -79,9 +79,9 @@ class MainFragment : Fragment(R.layout.layout_main) {
         }
         val oneCheckInAdapter = OneAdapter(binding.rcvCheckIn) {
             itemModules += MainModule { item, view ->
-                withDialogItems(view = view, context = this@MainFragment.requireContext()) {
+                /*withDialogItems(view = view, context = this@MainFragment.requireContext()) {
                     viewModel.updateStatus(clientId = item.client?.id, status = "CONFIRM_OFF")
-                }
+                }*/
             }
         }
         viewModel.listData.observe(viewLifecycleOwner) {
