@@ -17,7 +17,9 @@
 package com.app.worldkids.ui.screen.main
 
 import android.os.Bundle
+import android.util.TypedValue
 import android.view.View
+import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.app.worldkids.R
@@ -60,7 +62,15 @@ class MainFragment : Fragment(R.layout.layout_main) {
         viewModel.changeStatus.observe(viewLifecycleOwner) {
             if (it == null) {
                 binding.imgCheck.isVisible = true
-                val snackBar = Snackbar.make(binding.root, getString(R.string.verify_success), Snackbar.LENGTH_LONG)
+                val snackBar = Snackbar.make(
+                    binding.root,
+                    getString(R.string.verify_success),
+                    Snackbar.LENGTH_LONG
+                )
+                val view: View = snackBar.view
+                val tv =
+                    view.findViewById<View>(com.google.android.material.R.id.snackbar_text) as TextView
+                tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, resources.getDimension(R.dimen.text10sp))
                 snackBar.show()
             }
         }
