@@ -18,7 +18,6 @@ package com.app.worldkids.ui.screen.main
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.app.worldkids.R
 import com.app.worldkids.databinding.LayoutMainBinding
@@ -92,7 +91,9 @@ class MainFragment : Fragment(R.layout.layout_main) {
         MainScope().launch {
             delay(1000)
             try {
-                binding.rcvNoCheckIn.getChildAt(0).requestFocus()
+                if (oneNoCheckInAdapter.itemCount > 0) {
+                    binding.rcvNoCheckIn.getChildAt(0).requestFocus()
+                }
             } catch (e: Exception) {
                 e.printStackTrace()
             }

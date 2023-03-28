@@ -9,7 +9,6 @@ import com.app.worldkids.data.repository.NetworkRepository
 import com.app.worldkids.model.CheckInStatus
 import com.app.worldkids.model.response.ListUser
 import com.app.worldkids.model.response.Register
-import com.app.worldkids.model.response.User
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import timber.log.Timber

@@ -17,7 +17,7 @@ suspend inline fun <reified T> handleErrors(
     val result = try {
         response()
     } catch (e: IOException) {
-        Timber.e("handleErrors:Exception:$e")
+        Timber.e("handleErrors:Exception1111:$e")
         throw NetworkException(NetworkError.ServiceUnavailable)
     }
     when (result.status.value) {
@@ -26,7 +26,6 @@ suspend inline fun <reified T> handleErrors(
         500 -> throw NetworkException(NetworkError.ServerError)
         else -> throw NetworkException(NetworkError.UnknownError)
     }
-
     try {
         result.body()
     } catch (e: Exception) {

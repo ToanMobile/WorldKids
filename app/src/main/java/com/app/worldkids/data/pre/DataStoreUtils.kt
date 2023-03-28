@@ -3,14 +3,14 @@ package com.app.worldkids.data.pre
 import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.dataStore
-import com.app.worldkids.data.pre.serializer.RegisterSerializer
 import com.app.worldkids.model.response.Register
+import com.app.worldkids.model.serializer.RegisterSerializer
 import kotlinx.coroutines.flow.firstOrNull
 
 private val Context.dataStorePreferences by dataStore(fileName = "UserPreferencesDataStore", serializer = RegisterSerializer)
 
 class DataStoreUtils(private val context: Context) {
-    private val dataStoreUserPreferences: DataStore<Register> get() = context.dataStorePreferences
+    private val dataStoreUserPreferences: DataStore<Register?> get() = context.dataStorePreferences
 
     suspend fun getUserPreferences() = dataStoreUserPreferences.data.firstOrNull()
 

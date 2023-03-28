@@ -26,13 +26,13 @@ data class Register(
     @Serializable
     data class DataX(
         @SerialName("class")
-        val classX: Class,
+        val classX: Class? = null,
         @SerialName("deviceId")
-        val deviceId: String,
+        val deviceId: String? = null,
         @SerialName("platform")
-        val platform: String,
+        val platform: String? = null,
         @SerialName("school")
-        val school: School
+        val school: School? = null
     ) {
         override fun toString(): String {
             return "DataX(classX=$classX, deviceId=$deviceId, platform=$platform, school=$school)"

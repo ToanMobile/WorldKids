@@ -10,14 +10,10 @@ import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.RippleDrawable
 import android.provider.Settings
-import android.util.TypedValue
-import android.view.Gravity
 import android.view.View
 import android.widget.TextView
 import androidx.annotation.ColorRes
 import androidx.appcompat.content.res.AppCompatResources
-import androidx.compose.ui.unit.dp
-import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.view.MenuCompat
 import androidx.databinding.BindingAdapter

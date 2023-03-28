@@ -31,6 +31,9 @@ android {
         debug {
             applicationIdSuffix '.debug'
             versionNameSuffix '-DEBUG'
+            signingConfig signingConfigs.release
+            shrinkResources false
+            minifyEnabled false
         }
         release {
             signingConfig signingConfigs.release

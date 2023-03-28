@@ -1,4 +1,4 @@
-package com.app.worldkids.data.pre.serializer
+package com.app.worldkids.model.serializer
 
 import androidx.datastore.core.Serializer
 import com.app.worldkids.model.response.Register
@@ -10,12 +10,12 @@ import timber.log.Timber
 import java.io.InputStream
 import java.io.OutputStream
 
-object RegisterSerializer : Serializer<Register> {
+object RegisterSerializer : Serializer<Register?> {
 
     override val defaultValue: Register
         get() = Register()
 
-    override suspend fun readFrom(input: InputStream): Register {
+    override suspend fun readFrom(input: InputStream): Register? {
         return try {
             Json.decodeFromString(Register.serializer(), input.readBytes().decodeToString())
         } catch (serialization: SerializationException) {
@@ -24,12 +24,14 @@ object RegisterSerializer : Serializer<Register> {
         }
     }
 
-    override suspend fun writeTo(t: Register, output: OutputStream) {
+    override suspend fun writeTo(t: Register?, output: OutputStream) {
         try {
-            withContext(Dispatchers.IO) {
-                output.write(
-                    Json.encodeToString(Register.serializer(), t).encodeToByteArray()
-                )
+            t?.let {
+                withContext(Dispatchers.IO) {
+                    output.write(
+                        Json.encodeToString(Register.serializer(), t).encodeToByteArray()
+                    )
+                }
             }
         } catch (ex: Exception) {
             Timber.e("writeTo: ${ex.message}")

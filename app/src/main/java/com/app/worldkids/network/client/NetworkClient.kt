@@ -1,5 +1,6 @@
 package com.app.worldkids.network.client
 
+import com.app.worldkids.model.BaseResponse
 import com.app.worldkids.model.CheckInStatus
 import com.app.worldkids.model.request.ChangeStatusRequest
 import com.app.worldkids.model.request.RegisterRequest
@@ -7,7 +8,6 @@ import com.app.worldkids.model.response.ListUser
 import com.app.worldkids.model.response.Register
 import com.app.worldkids.network.NetworkConstants
 import com.app.worldkids.network.helper.handleErrors
-import com.app.worldkids.model.BaseResponse
 import com.app.worldkids.utils.DefaultCoroutineDispatchers
 import com.app.worldkids.utils.getAndroidID
 import io.ktor.client.HttpClient
