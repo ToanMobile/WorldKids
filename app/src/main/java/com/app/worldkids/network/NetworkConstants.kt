@@ -11,6 +11,8 @@ object NetworkConstants {
 
         fun statusReport(classId: String, type:String) = "$route/admin/checkin/$classId/report?type=$type"
 
+        fun verify(classId: String) = "$route/admin/checkin/$classId/confirm-checkin"
+
         val changeStatus = "$route/admin/checkin/change-status"
 
         val byName: (String) -> String = { name -> "$route/$name"}

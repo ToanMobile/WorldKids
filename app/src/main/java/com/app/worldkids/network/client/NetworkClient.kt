@@ -67,4 +67,10 @@ class NetworkClient(
             setBody(Json.encodeToString(ChangeStatusRequest(clientId = clientId, status = status)))
         }
     }
+
+    suspend fun verify(classId: String) {
+        httpClient.post(NetworkConstants.Wordkids.verify(classId = classId)) {
+            contentType(ContentType.Application.Json)
+        }
+    }
 }

@@ -85,6 +85,17 @@ class MainViewModel(private val networkRepository: NetworkRepository, dataStoreU
         viewModelScope.launch {
             networkRepository.changeStatus(clientId = clientId.toString(), status = status).onSuccess {
                 initDataClass(classId = classId ?: "")
+            }.onFailure {
+                Timber.e(it)
+            }
+        }
+    }
+
+
+    fun verify() {
+        if (classId == null) return
+        viewModelScope.launch {
+            networkRepository.verify(classId = classId.toString()).onSuccess {
                 _changeStatus.postValue(null)
             }.onFailure {
                 _changeStatus.postValue(it.message)

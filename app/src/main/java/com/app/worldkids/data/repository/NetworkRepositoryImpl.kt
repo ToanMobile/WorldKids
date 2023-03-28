@@ -58,4 +58,14 @@ class NetworkRepositoryImpl(private val networkClient: NetworkClient, private va
             Result.failure(e)
         }
     }
+
+    override suspend fun verify(classId: String): Result<Boolean> {
+        return try {
+            val response = networkClient.verify(classId = classId)
+            Result.success(true)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Result.failure(e)
+        }
+    }
 }

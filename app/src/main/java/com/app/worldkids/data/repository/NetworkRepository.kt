@@ -13,4 +13,6 @@ interface NetworkRepository {
     suspend fun statusReport(classId : String): Result<CheckInStatus>
 
     suspend fun changeStatus(clientId: String, status: String): Result<Boolean>
+
+    suspend fun verify(classId: String): Result<Boolean>
 }
