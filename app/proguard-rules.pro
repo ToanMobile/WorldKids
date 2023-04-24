@@ -341,3 +341,5 @@
 -keepclassmembers class io.ktor.** {
     volatile <fields>;
 }
+-dontwarn java.lang.management.ManagementFactory
+-dontwarn java.lang.management.RuntimeMXBean
