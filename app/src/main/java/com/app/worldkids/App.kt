@@ -24,7 +24,7 @@ class App : Application() {
             androidFileProperties()
             modules(
                 dataModule,
-                networkModule(BuildConfig.DEBUG),
+                networkModule(false),
                 viewModelModule
             )
         }

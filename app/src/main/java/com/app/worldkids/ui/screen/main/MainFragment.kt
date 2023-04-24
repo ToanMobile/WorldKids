@@ -16,7 +16,9 @@
 
 package com.app.worldkids.ui.screen.main
 
+import android.content.Intent
 import android.os.Bundle
+import android.provider.Settings
 import android.util.TypedValue
 import android.view.View
 import android.widget.TextView
@@ -76,6 +78,10 @@ class MainFragment : Fragment(R.layout.layout_main) {
         }
         binding.layoutVerify.setOnClickListener {
             viewModel.verify()
+        }
+        binding.btnSetting.setOnClickListener {
+            val i = Intent(Settings.ACTION_SETTINGS)
+            startActivity(i)
         }
     }
 

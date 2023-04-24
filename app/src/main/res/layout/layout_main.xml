@@ -128,6 +128,7 @@
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_marginEnd="@dimen/dimens_16"
                 android:layout_weight="0.5"
                 android:gravity="end"
                 android:orientation="vertical">
@@ -150,6 +151,22 @@
                     android:textColor="@color/color3968DA"
                     android:textSize="@dimen/text24sp" />
             </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:focusable="true"
+                android:focusableInTouchMode="true">
+
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/btnSetting"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:background="@color/transparent"
+                    android:duplicateParentState="true"
+                    app:srcCompat="@drawable/selector_button_settings" />
+            </FrameLayout>
         </androidx.appcompat.widget.LinearLayoutCompat>
 
         <androidx.appcompat.widget.LinearLayoutCompat

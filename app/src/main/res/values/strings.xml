@@ -5,6 +5,7 @@
     <string name="error_generic">An error has occurred</string>
     <string name="error_persistence">Persistence data error</string>
     <string name="error_no_connection">No connection</string>
+    <string name="setting">Settings</string>
     <string name="checkIn">Đã điểm danh</string>
     <string name="noCheckIn">Chưa điểm danh</string>
     <string name="verify_in_class">Điểm danh vào lớp</string>
