@@ -14,6 +14,7 @@ import android.view.View
 import android.widget.TextView
 import androidx.annotation.ColorRes
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.view.MenuCompat
 import androidx.databinding.BindingAdapter
@@ -48,35 +49,35 @@ fun ShapeableImageView.setStatus(isStatus: String) {
 
 @BindingAdapter("setStatus")
 fun TextView.setStatus(isStatus: String) {
-    this.background = when (isStatus) {
+    when (isStatus) {
         StatusType.IN.name -> {
             text = this.context.getString(R.string.checkIn)
-            AppCompatResources.getDrawable(context, R.color.color3E9346)
+            background.setTint(ContextCompat.getColor(context, R.color.color3E9346))
         }
 
         StatusType.ABSENT.name -> {
             text = this.context.getString(R.string.noCheckIn)
-            AppCompatResources.getDrawable(context, R.color.colorEA1911)
+            background.setTint(ContextCompat.getColor(context, R.color.colorEA1911))
         }
 
         StatusType.LATE.name -> {
             text = this.context.getString(R.string.confirm_delay)
-            AppCompatResources.getDrawable(context, R.color.color8939DA)
+            background.setTint(ContextCompat.getColor(context, R.color.color8939DA))
         }
 
         StatusType.OFF.name -> {
-            text = this.context.getString(R.string.off)
-            AppCompatResources.getDrawable(context, R.color.colorF7AD1A)
+            text = this.context.getString(R.string.verify_off)
+            background.setTint(ContextCompat.getColor(context, R.color.colorF7AD1A))
         }
 
         StatusType.CONFIRM_OFF.name -> {
             text = this.context.getString(R.string.confirm_off)
-            AppCompatResources.getDrawable(context, R.color.colorF27F0C)
+            background.setTint(ContextCompat.getColor(context, R.color.colorF27F0C))
         }
 
         else -> {
             text = this.context.getString(R.string.present)
-            AppCompatResources.getDrawable(context, R.color.color3E9346)
+            background.setTint(ContextCompat.getColor(context, R.color.color3E9346))
         }
     }
 }

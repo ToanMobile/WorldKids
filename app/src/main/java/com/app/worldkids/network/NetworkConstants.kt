@@ -1,9 +1,9 @@
 package com.app.worldkids.network
 
 object NetworkConstants {
-    const val baseUrl = "http://139.180.155.164:3002/"
+    const val baseUrl = "https://api-ccare.baonguyengroup.com.vn/" //"https://socket-ccare.baonguyengroup.com.vn/"
 
-    object Wordkids {
+    object WorldKids {
         const val route = baseUrl + "api"
         const val register = "$route/admin/auth/login-device"
         fun listCheckIn(classId: String) = "$route/admin/checkin/$classId/list-checkin"

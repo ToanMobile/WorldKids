@@ -38,7 +38,7 @@ class NetworkClient(
 
     suspend fun register() : BaseResponse<Register> {
         return handleErrors(coroutineDispatchers) {
-            httpClient.post(NetworkConstants.Wordkids.register) {
+            httpClient.post(NetworkConstants.WorldKids.register) {
                 contentType(ContentType.Application.Json)
                 setBody(Json.encodeToString(RegisterRequest(deviceId = getAndroidID)))
             }
@@ -47,7 +47,7 @@ class NetworkClient(
 
     suspend fun getListCheckIn(classId: String): BaseResponse<ListUser> {
         return handleErrors(coroutineDispatchers) {
-            httpClient.get(NetworkConstants.Wordkids.listCheckIn(classId = classId)) {
+            httpClient.get(NetworkConstants.WorldKids.listCheckIn(classId = classId)) {
                 contentType(ContentType.Application.Json)
             }
         }
@@ -55,21 +55,21 @@ class NetworkClient(
 
     suspend fun statusReport(classId: String): BaseResponse<CheckInStatus> {
         return handleErrors(coroutineDispatchers) {
-            httpClient.get(NetworkConstants.Wordkids.statusReport(classId = classId, type = "CHECKIN")) {
+            httpClient.get(NetworkConstants.WorldKids.statusReport(classId = classId, type = "CHECKIN")) {
                 contentType(ContentType.Application.Json)
             }
         }
     }
 
     suspend fun changeStatus(clientId: String, status: String) {
-        httpClient.post(NetworkConstants.Wordkids.changeStatus) {
+        httpClient.post(NetworkConstants.WorldKids.changeStatus) {
             contentType(ContentType.Application.Json)
             setBody(Json.encodeToString(ChangeStatusRequest(clientId = clientId, status = status)))
         }
     }
 
     suspend fun verify(classId: String) {
-        httpClient.post(NetworkConstants.Wordkids.verify(classId = classId)) {
+        httpClient.post(NetworkConstants.WorldKids.verify(classId = classId)) {
             contentType(ContentType.Application.Json)
         }
     }

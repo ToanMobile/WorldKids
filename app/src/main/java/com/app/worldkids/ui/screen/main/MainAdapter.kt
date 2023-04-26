@@ -1,6 +1,7 @@
 package com.app.worldkids.ui.screen.main
 
 import android.view.View
+import androidx.appcompat.content.res.AppCompatResources
 import coil.load
 import coil.transform.CircleCropTransformation
 import com.app.worldkids.R
@@ -38,10 +39,10 @@ class MainModule(clickItem: (CheckIn, View) -> Unit) : ItemModule<CheckIn>() {
                 }
                 itemRoot.setOnFocusChangeListener { v, hasFocus ->
                     if (hasFocus) {
-                        v.setBackgroundResource(R.drawable.item_focus_absent)
+                        v.foreground = AppCompatResources.getDrawable(v.context, R.drawable.item_focus_absent)
                         initStatusBackground(itemRoot = itemRoot, model.status)
                     } else {
-                        v.setBackgroundResource(R.drawable.item_no_focus)
+                        v.foreground = AppCompatResources.getDrawable(v.context, R.drawable.item_no_focus)
                     }
                 }
             }

@@ -43,7 +43,7 @@
                     app:strokeColor="@color/color3E9346"
                     app:strokeWidth="@dimen/dimens_4" />
 
-                <TextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/txtStatus"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -51,6 +51,7 @@
                     android:background="@drawable/item_status"
                     app:setStatus="@{isStatus}"
                     android:ellipsize="end"
+                    app:cornerRadius="@dimen/dimens_8"
                     android:fontFamily="sans-serif-medium"
                     android:lines="1"
                     android:padding="@dimen/dimens_8"

@@ -16,6 +16,6 @@
     <string name="off_">Vắng có phép</string>
     <string name="confirm_off">Xác nhận vắng</string>
     <string name="confirm_delay">Xin vào trễ</string>
-    <string name="off">Đang vắng mặt</string>
+    <string name="verify_off">Đang vắng mặt</string>
     <string name="verify_success">Điểm danh thành công!</string>
 </resources>
