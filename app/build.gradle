@@ -17,7 +17,7 @@ android {
         versionName androidVersionName
         multiDexEnabled true
         testInstrumentationRunner packageAndroidJUnitRunner
-        setProperty("archivesBaseName", "v$versionName($versionCode)")
+        setProperty("archivesBaseName", "WorldKids(v$versionName)($versionCode)")
     }
 
     signingConfigs {
