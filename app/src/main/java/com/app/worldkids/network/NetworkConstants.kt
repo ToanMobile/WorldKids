@@ -1,7 +1,7 @@
 package com.app.worldkids.network
 
 object NetworkConstants {
-    const val baseUrl = "https://api-ccare.baonguyengroup.com.vn/" //"https://socket-ccare.baonguyengroup.com.vn/"
+    const val baseUrl = "https://api-ccare.baonguyengroup.com.vn/"
 
     object WorldKids {
         const val route = baseUrl + "api"
