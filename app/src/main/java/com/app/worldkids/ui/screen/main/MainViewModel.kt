@@ -10,12 +10,17 @@ import com.app.worldkids.model.CheckInStatus
 import com.app.worldkids.model.response.ListUser
 import com.app.worldkids.model.response.Register
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
-class MainViewModel(private val networkRepository: NetworkRepository, dataStoreUtils: DataStoreUtils) : ViewModel() {
+class MainViewModel(
+    private val networkRepository: NetworkRepository,
+    dataStoreUtils: DataStoreUtils
+) : ViewModel() {
     private val listDataCheckIn = MutableLiveData<ListUser>()
     val listData: LiveData<ListUser> = listDataCheckIn
 
@@ -35,6 +40,7 @@ class MainViewModel(private val networkRepository: NetworkRepository, dataStoreU
     val currentTime = MutableLiveData<String>()
     private var user: Register? = null
     private var classId: String? = null
+    private var job: Job? = null
 
     init {
         viewModelScope.launch {
@@ -49,6 +55,18 @@ class MainViewModel(private val networkRepository: NetworkRepository, dataStoreU
             currentHours.postValue(localTime.format(DateTimeFormatter.ofPattern("HH:mm")))
             currentTime.postValue(localTime.format(DateTimeFormatter.ofPattern("EEEE, d MMMM yyyy")))
         }
+        job = viewModelScope.launch {
+            while (true) {
+                delay(30000)
+                refreshData()
+            }
+        }
+    }
+
+    private suspend fun refreshData() {
+        if (classId == null) return
+        initDataClass(classId = classId ?: "")
+        initStatusClass(classId = classId ?: "")
     }
 
     private suspend fun initNameClass(user: Register?) {
@@ -64,8 +82,10 @@ class MainViewModel(private val networkRepository: NetworkRepository, dataStoreU
 
     private suspend fun initDataClass(classId: String?) {
         networkRepository.getListCheckIn(classId = classId ?: "").onSuccess {
-            Timber.e("initDataClass::$it")
-            listDataCheckIn.postValue(it)
+            if (listDataCheckIn.value == null || listDataCheckIn.value?.equals(it) == false) {
+                Timber.e("initDataClass::$it")
+                listDataCheckIn.postValue(it)
+            }
         }.onFailure {
             Timber.e(it)
         }
@@ -73,8 +93,10 @@ class MainViewModel(private val networkRepository: NetworkRepository, dataStoreU
 
     private suspend fun initStatusClass(classId: String?) {
         networkRepository.statusReport(classId = classId ?: "").onSuccess {
-            Timber.e("onSuccess::$it")
-            _countCheckIn.postValue(it)
+            if (_countCheckIn.value == null || _countCheckIn.value?.equals(it) == false) {
+                Timber.e("initStatusClass::$it")
+                _countCheckIn.postValue(it)
+            }
         }.onFailure {
             Timber.e(it)
         }
@@ -83,11 +105,12 @@ class MainViewModel(private val networkRepository: NetworkRepository, dataStoreU
     fun updateStatus(clientId: Int?, status: String) {
         if (clientId == null) return
         viewModelScope.launch {
-            networkRepository.changeStatus(clientId = clientId.toString(), status = status).onSuccess {
-                initDataClass(classId = classId ?: "")
-            }.onFailure {
-                Timber.e(it)
-            }
+            networkRepository.changeStatus(clientId = clientId.toString(), status = status)
+                .onSuccess {
+                    initDataClass(classId = classId ?: "")
+                }.onFailure {
+                    Timber.e(it)
+                }
         }
     }
 
@@ -112,5 +135,10 @@ class MainViewModel(private val networkRepository: NetworkRepository, dataStoreU
             classId = user?.data?.classX?.id
         }
         Timber.e("getUserPreferences::$user")
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        job?.cancel()
     }
 }
